@@ -179,6 +179,46 @@
     
     <li>
         
+        <a href="2_Web_Contents_상세페이지_생활용품.html" 
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
+            생활용품
+        </a>
+    </li>
+    
+    
+    
+    <li>
+        
+        <a href="2_Web_Contents_상세페이지_영양제.html" 
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
+            영양제
+        </a>
+    </li>
+    
+    
+    
+    <li>
+        
+        <a href="2_Web_Contents_상세페이지_음식.html" 
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
+            음식
+        </a>
+    </li>
+    
+    
+    
+    <li>
+        
+        <a href="2_Web_Contents_상세페이지_의류잡화.html" 
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
+            의류잡화
+        </a>
+    </li>
+    
+    
+    
+    <li>
+        
         <a href="2_Web_Contents_상세페이지_트래블폰.html" 
            class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
             트래블폰
@@ -249,6 +289,18 @@
             <a href="3_BX_&_Print_대소봉투.html" 
                class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
                 대소봉투
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        
+            
+            <a href="3_BX_&_Print_로고간판.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                로고간판
             </a>
         
     </li>
@@ -498,79 +550,7 @@ if (typeof handleCategoryClick !== 'function') {
             
                 <!-- 서브페이지 동적 콘텐츠 -->
                 <div class="p-5 md:p-10 flex-1">
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 mb-12">
-    
-    
-    <div class="cursor-pointer group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center"
-         onclick="openLightbox('../3 BX & Print/패키지/나르지닌 나올이뮨.jpg', '나르지닌 나올이뮨.jpg')">
-        <img src="../3 BX & Print/패키지/나르지닌 나올이뮨.jpg" alt="나르지닌 나올이뮨.jpg" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
-        
-        <!-- Hover Overlay -->
-        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
-            <span class="text-white text-sm font-semibold text-center break-words transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">나르지닌 나올이뮨.jpg</span>
-        </div>
-    </div>
-    
-    
-</div>
-
-<!-- Lightbox Modal -->
-<div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center opacity-0 transition-opacity duration-300" onclick="closeLightbox()">
-    <!-- Close Button -->
-    <button class="absolute top-6 right-6 text-white/80 hover:text-white transition-colors p-2 focus:outline-none" aria-label="Close lightbox" onclick="closeLightbox()">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-    </button>
-    
-    <!-- Modal Content -->
-    <div class="relative max-w-[90vw] max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-        <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
-        <p id="lightbox-caption" class="text-white/90 text-sm mt-4 font-semibold tracking-wide text-center"></p>
-    </div>
-</div>
-
-<script>
-function openLightbox(src, title) {
-    const modal = document.getElementById('lightbox-modal');
-    const img = document.getElementById('lightbox-img');
-    const caption = document.getElementById('lightbox-caption');
-    
-    img.src = src;
-    img.alt = title;
-    caption.textContent = title;
-    
-    modal.classList.remove('hidden');
-    // Force a reflow
-    modal.offsetHeight;
-    modal.classList.add('opacity-100');
-    img.classList.remove('scale-95');
-    img.classList.add('scale-100');
-    
-    document.body.classList.add('overflow-hidden');
-}
-
-function closeLightbox() {
-    const modal = document.getElementById('lightbox-modal');
-    const img = document.getElementById('lightbox-img');
-    
-    modal.classList.remove('opacity-100');
-    img.classList.remove('scale-100');
-    img.classList.add('scale-95');
-    
-    setTimeout(() => {
-        modal.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-    }, 300);
-}
-
-// Close lightbox on Escape key press
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeLightbox();
-    }
-});
-</script>
+                    
                 </div>
             
         </main>
