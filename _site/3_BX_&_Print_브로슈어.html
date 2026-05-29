@@ -75,61 +75,78 @@
 <ul class="space-y-1">
     
     
-    <li class="group/d1 relative">
-        <a href="1_Websites.html" 
-           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
-            1 Websites
-        </a>
+    <li class="relative">
+        
+            
+            <a href="1_Websites.html" 
+               class="block py-2 px-3 text-sm font-bold rounded-lg transition-all duration-200 text-gray-900 hover:bg-gray-50">
+                1 Websites
+            </a>
         
     </li>
     
     
     
-    <li class="group/d1 relative">
-        <a href="2_Web_Contents.html" 
-           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
-            2 Web Contents
-        </a>
+    <li class="relative">
         
-        <div class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d1:max-h-[800px] group-hover/d1:opacity-100 group-hover/d1:visible pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
             
+            <div class="flex items-center justify-between py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                 onclick="toggleSubmenu(event, 'submenu-2_Web_Contents')">
+                <span>2 Web Contents</span>
+                <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div id="submenu-2_Web_Contents" 
+                 class="hidden pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
+                
 <ul class="space-y-1">
     
     
-    <li class="group/d2 relative">
-        <a href="2_Web_Contents_랜딩페이지.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            랜딩페이지
-        </a>
+    <li class="relative">
         
-    </li>
-    
-    
-    
-    <li class="group/d2 relative">
-        <a href="2_Web_Contents_배너.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            배너
-        </a>
-        
-    </li>
-    
-    
-    
-    <li class="group/d2 relative">
-        <a href="2_Web_Contents_상세페이지.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            상세페이지
-        </a>
-        
-        <div class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d2:max-h-[500px] group-hover/d2:opacity-100 group-hover/d2:visible pl-4 mt-1 border-l border-gray-100 ml-2 mb-1">
             
+            <a href="2_Web_Contents_랜딩페이지.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                랜딩페이지
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <a href="2_Web_Contents_배너.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                배너
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <div class="flex items-center justify-between py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 cursor-pointer transition-colors"
+                 onclick="toggleSubmenu(event, 'submenu-2_Web_Contents_상세페이지')">
+                <span>상세페이지</span>
+                <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-200 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div id="submenu-2_Web_Contents_상세페이지" 
+                 class="hidden pl-3 mt-1 border-l border-gray-100 ml-2 mb-1">
+                
 <ul class="space-y-1">
     
     
     <li>
+        
         <a href="2_Web_Contents_상세페이지_나르지닌1.html" 
-           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
             나르지닌1
         </a>
     </li>
@@ -137,8 +154,9 @@
     
     
     <li>
+        
         <a href="2_Web_Contents_상세페이지_나르지닌2.html" 
-           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
             나르지닌2
         </a>
     </li>
@@ -146,8 +164,9 @@
     
     
     <li>
+        
         <a href="2_Web_Contents_상세페이지_나올이뮨.html" 
-           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
             나올이뮨
         </a>
     </li>
@@ -155,8 +174,9 @@
     
     
     <li>
+        
         <a href="2_Web_Contents_상세페이지_트래블폰.html" 
-           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
             트래블폰
         </a>
     </li>
@@ -164,134 +184,163 @@
     
 </ul>
 
-        </div>
+            </div>
         
     </li>
     
     
     
-    <li class="group/d2 relative">
-        <a href="2_Web_Contents_웹포스터.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            웹포스터
-        </a>
+    <li class="relative">
+        
+            
+            <a href="2_Web_Contents_웹포스터.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                웹포스터
+            </a>
         
     </li>
     
     
     
-    <li class="group/d2 relative">
-        <a href="2_Web_Contents_일러스트.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            일러스트
-        </a>
+    <li class="relative">
+        
+            
+            <a href="2_Web_Contents_일러스트.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                일러스트
+            </a>
         
     </li>
     
     
 </ul>
 
-        </div>
+            </div>
         
     </li>
     
     
     
-    <li class="group/d1 relative">
-        <a href="3_BX_&_Print.html" 
-           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
-            3 BX & Print
-        </a>
+    <li class="relative">
         
-        <div class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d1:max-h-[800px] group-hover/d1:opacity-100 group-hover/d1:visible pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
             
+            <div class="flex items-center justify-between py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                 onclick="toggleSubmenu(event, 'submenu-3_BX_&_Print')">
+                <span>3 BX & Print</span>
+                <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div id="submenu-3_BX_&_Print" 
+                 class=" pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
+                
 <ul class="space-y-1">
     
     
-    <li class="group/d2 relative">
-        <a href="3_BX_&_Print_대소봉투.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            대소봉투
-        </a>
+    <li class="relative">
         
-    </li>
-    
-    
-    
-    <li class="group/d2 relative">
-        <a href="3_BX_&_Print_메뉴판.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            메뉴판
-        </a>
-        
-    </li>
-    
-    
-    
-    <li class="group/d2 relative">
-        <a href="3_BX_&_Print_명함.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            명함
-        </a>
-        
-    </li>
-    
-    
-    
-    <li class="group/d2 relative">
-        <a href="3_BX_&_Print_브로슈어.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            브로슈어
-        </a>
-        
-    </li>
-    
-    
-    
-    <li class="group/d2 relative">
-        <a href="3_BX_&_Print_쇼핑백.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            쇼핑백
-        </a>
-        
-    </li>
-    
-    
-    
-    <li class="group/d2 relative">
-        <a href="3_BX_&_Print_쿠폰.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            쿠폰
-        </a>
-        
-    </li>
-    
-    
-    
-    <li class="group/d2 relative">
-        <a href="3_BX_&_Print_티셔츠.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            티셔츠
-        </a>
-        
-    </li>
-    
-    
-    
-    <li class="group/d2 relative">
-        <a href="3_BX_&_Print_패키지.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            패키지
-        </a>
-        
-        <div class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d2:max-h-[500px] group-hover/d2:opacity-100 group-hover/d2:visible pl-4 mt-1 border-l border-gray-100 ml-2 mb-1">
             
+            <a href="3_BX_&_Print_대소봉투.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                대소봉투
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <a href="3_BX_&_Print_메뉴판.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                메뉴판
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <a href="3_BX_&_Print_명함.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                명함
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <a href="3_BX_&_Print_브로슈어.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 bg-blue-50 text-blue-600 font-semibold">
+                브로슈어
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <a href="3_BX_&_Print_쇼핑백.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                쇼핑백
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <a href="3_BX_&_Print_쿠폰.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                쿠폰
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <a href="3_BX_&_Print_티셔츠.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                티셔츠
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <div class="flex items-center justify-between py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 cursor-pointer transition-colors"
+                 onclick="toggleSubmenu(event, 'submenu-3_BX_&_Print_패키지')">
+                <span>패키지</span>
+                <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-200 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div id="submenu-3_BX_&_Print_패키지" 
+                 class="hidden pl-3 mt-1 border-l border-gray-100 ml-2 mb-1">
+                
 <ul class="space-y-1">
     
     
     <li>
+        
         <a href="3_BX_&_Print_패키지_나르지닌.html" 
-           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
             나르지닌
         </a>
     </li>
@@ -299,8 +348,9 @@
     
     
     <li>
+        
         <a href="3_BX_&_Print_패키지_나올이뮨.html" 
-           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
             나올이뮨
         </a>
     </li>
@@ -308,8 +358,9 @@
     
     
     <li>
+        
         <a href="3_BX_&_Print_패키지_선물박스.html" 
-           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
             선물박스
         </a>
     </li>
@@ -317,8 +368,9 @@
     
     
     <li>
+        
         <a href="3_BX_&_Print_패키지_키스립.html" 
-           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 text-gray-500 hover:text-black hover:bg-gray-50">
             키스립
         </a>
     </li>
@@ -326,50 +378,79 @@
     
 </ul>
 
-        </div>
+            </div>
         
     </li>
     
     
     
-    <li class="group/d2 relative">
-        <a href="3_BX_&_Print_포스터.html" 
-           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
-            포스터
-        </a>
+    <li class="relative">
         
-    </li>
-    
-    
-</ul>
-
-        </div>
-        
-    </li>
-    
-    
-    
-    <li class="group/d1 relative">
-        <a href="4_Career.html" 
-           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
-            4 Career
-        </a>
-        
-    </li>
-    
-    
-    
-    <li class="group/d1 relative">
-        <a href="5_Ai.html" 
-           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
-            5 Ai
-        </a>
+            
+            <a href="3_BX_&_Print_포스터.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 text-gray-600 hover:text-black hover:bg-gray-50">
+                포스터
+            </a>
         
     </li>
     
     
 </ul>
 
+            </div>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <a href="4_Career.html" 
+               class="block py-2 px-3 text-sm font-bold rounded-lg transition-all duration-200 text-gray-900 hover:bg-gray-50">
+                4 Career
+            </a>
+        
+    </li>
+    
+    
+    
+    <li class="relative">
+        
+            
+            <a href="5_Ai.html" 
+               class="block py-2 px-3 text-sm font-bold rounded-lg transition-all duration-200 text-gray-900 hover:bg-gray-50">
+                5 Ai
+            </a>
+        
+    </li>
+    
+    
+</ul>
+
+
+<!-- Script to handle click-toggle submenus -->
+<script>
+if (typeof toggleSubmenu !== 'function') {
+    window.toggleSubmenu = function(event, id) {
+        if (event) event.stopPropagation();
+        const submenu = document.getElementById(id);
+        if (!submenu) return;
+        
+        // Find the arrow inside the clicked element
+        const clickTarget = event.currentTarget;
+        const arrow = clickTarget.querySelector('svg');
+        
+        if (submenu.classList.contains('hidden')) {
+            submenu.classList.remove('hidden');
+            if (arrow) arrow.classList.add('rotate-180');
+        } else {
+            submenu.classList.add('hidden');
+            if (arrow) arrow.classList.remove('rotate-180');
+        }
+    };
+}
+</script>
 
                 </nav>
             </div>
