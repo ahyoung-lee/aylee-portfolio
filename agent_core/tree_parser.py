@@ -52,7 +52,8 @@ def get_file_info(file_path, rel_path):
             "name": os.path.basename(file_path),
             "path": rel_path.replace("\\", "/"),
             "type": file_type,
-            "ext": ext
+            "ext": ext,
+            "mtime": os.path.getmtime(file_path)
         }
     except Exception:
         return None
@@ -185,6 +186,8 @@ def _get_files(root_dir, dir_path):
                 f_info = get_file_info(full_path, rel_path)
                 if f_info:
                     files.append(f_info)
+        # Sort files by modification time descending (newest first)
+        files.sort(key=lambda x: x.get("mtime", 0), reverse=True)
     except Exception:
         pass
     return files
