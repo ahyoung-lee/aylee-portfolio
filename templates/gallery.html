@@ -1,0 +1,82 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
+    {% for f in files %}
+    {% if f.ext in ['.jpg', '.png', '.gif'] %}
+    <div class="cursor-pointer group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center"
+         onclick="openLightbox('{{ root_path|default('') }}{{ f.path }}', '{{ f.name }}')">
+        <img src="{{ root_path|default('') }}{{ f.path }}" alt="{{ f.name }}" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        
+        <!-- Hover Overlay -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+            <span class="text-white text-sm font-semibold text-center break-words transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">{{ f.name }}</span>
+        </div>
+    </div>
+    {% elif f.ext == '.pdf' %}
+    <div class="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center">
+        <div class="flex flex-col items-center justify-center p-4 text-center">
+            <svg class="w-12 h-12 text-red-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            <span class="text-sm font-medium text-gray-600 truncate w-full px-2">{{ f.name }}</span>
+        </div>
+        <!-- Link to PDF -->
+        <a href="{{ root_path|default('') }}{{ f.path }}" target="_blank" class="absolute inset-0 z-10"></a>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<!-- Lightbox Modal -->
+<div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center opacity-0 transition-opacity duration-300" onclick="closeLightbox()">
+    <!-- Close Button -->
+    <button class="absolute top-6 right-6 text-white/80 hover:text-white transition-colors p-2 focus:outline-none" aria-label="Close lightbox" onclick="closeLightbox()">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+    
+    <!-- Modal Content -->
+    <div class="relative max-w-[90vw] max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+        <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
+        <p id="lightbox-caption" class="text-white/90 text-sm mt-4 font-semibold tracking-wide text-center"></p>
+    </div>
+</div>
+
+<script>
+function openLightbox(src, title) {
+    const modal = document.getElementById('lightbox-modal');
+    const img = document.getElementById('lightbox-img');
+    const caption = document.getElementById('lightbox-caption');
+    
+    img.src = src;
+    img.alt = title;
+    caption.textContent = title;
+    
+    modal.classList.remove('hidden');
+    // Force a reflow
+    modal.offsetHeight;
+    modal.classList.add('opacity-100');
+    img.classList.remove('scale-95');
+    img.classList.add('scale-100');
+    
+    document.body.classList.add('overflow-hidden');
+}
+
+function closeLightbox() {
+    const modal = document.getElementById('lightbox-modal');
+    const img = document.getElementById('lightbox-img');
+    
+    modal.classList.remove('opacity-100');
+    img.classList.remove('scale-100');
+    img.classList.add('scale-95');
+    
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }, 300);
+}
+
+// Close lightbox on Escape key press
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
+</script>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aylee Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            margin: 0;
+            overflow: hidden; /* No scroll on main */
+        }
+        .bg-cover-fixed {
+            background-image: url('../mainbg/mainbg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        .scrollable-content {
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+        /* Custom Scrollbar for inner content */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <div class="bg-cover-fixed"></div>
+    
+    <div class="flex h-screen w-full relative z-10 bg-white/80 backdrop-blur-sm">
+        
+        <!-- Left Sidebar (Navigation) -->
+        <aside class="w-72 flex-shrink-0 border-r border-gray-200 bg-white/90 shadow-lg flex flex-col justify-between">
+            <div class="p-8">
+                <a href="index.html" class="block mb-10">
+                    <h1 class="text-2xl font-black tracking-tight uppercase">Portfolio</h1>
+                </a>
+                
+                <nav>
+                    
+
+
+<ul class="space-y-1">
+    
+    
+    <li class="group/d1 relative">
+        <a href="1_Websites.html" 
+           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
+            1 Websites
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d1 relative">
+        <a href="2_Web_Contents.html" 
+           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
+            2 Web Contents
+        </a>
+        
+        <div class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d1:max-h-[800px] group-hover/d1:opacity-100 group-hover/d1:visible pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
+            
+<ul class="space-y-1">
+    
+    
+    <li class="group/d2 relative">
+        <a href="2_Web_Contents_랜딩페이지.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            랜딩페이지
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="2_Web_Contents_배너.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            배너
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="2_Web_Contents_상세페이지.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            상세페이지
+        </a>
+        
+        <div class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d2:max-h-[500px] group-hover/d2:opacity-100 group-hover/d2:visible pl-4 mt-1 border-l border-gray-100 ml-2 mb-1">
+            
+<ul class="space-y-1">
+    
+    
+    <li>
+        <a href="2_Web_Contents_상세페이지_나르지닌1.html" 
+           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            나르지닌1
+        </a>
+    </li>
+    
+    
+    
+    <li>
+        <a href="2_Web_Contents_상세페이지_나르지닌2.html" 
+           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            나르지닌2
+        </a>
+    </li>
+    
+    
+    
+    <li>
+        <a href="2_Web_Contents_상세페이지_나올이뮨.html" 
+           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            나올이뮨
+        </a>
+    </li>
+    
+    
+    
+    <li>
+        <a href="2_Web_Contents_상세페이지_트래블폰.html" 
+           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            트래블폰
+        </a>
+    </li>
+    
+    
+</ul>
+
+        </div>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="2_Web_Contents_웹포스터.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            웹포스터
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="2_Web_Contents_일러스트.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            일러스트
+        </a>
+        
+    </li>
+    
+    
+</ul>
+
+        </div>
+        
+    </li>
+    
+    
+    
+    <li class="group/d1 relative">
+        <a href="3_BX_&_Print.html" 
+           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
+            3 BX & Print
+        </a>
+        
+        <div class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d1:max-h-[800px] group-hover/d1:opacity-100 group-hover/d1:visible pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
+            
+<ul class="space-y-1">
+    
+    
+    <li class="group/d2 relative">
+        <a href="3_BX_&_Print_대소봉투.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            대소봉투
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="3_BX_&_Print_메뉴판.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            메뉴판
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="3_BX_&_Print_명함.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            명함
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="3_BX_&_Print_브로슈어.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            브로슈어
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="3_BX_&_Print_쇼핑백.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            쇼핑백
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="3_BX_&_Print_쿠폰.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            쿠폰
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="3_BX_&_Print_티셔츠.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            티셔츠
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="3_BX_&_Print_패키지.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            패키지
+        </a>
+        
+        <div class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d2:max-h-[500px] group-hover/d2:opacity-100 group-hover/d2:visible pl-4 mt-1 border-l border-gray-100 ml-2 mb-1">
+            
+<ul class="space-y-1">
+    
+    
+    <li>
+        <a href="3_BX_&_Print_패키지_나르지닌.html" 
+           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            나르지닌
+        </a>
+    </li>
+    
+    
+    
+    <li>
+        <a href="3_BX_&_Print_패키지_나올이뮨.html" 
+           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            나올이뮨
+        </a>
+    </li>
+    
+    
+    
+    <li>
+        <a href="3_BX_&_Print_패키지_선물박스.html" 
+           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            선물박스
+        </a>
+    </li>
+    
+    
+    
+    <li>
+        <a href="3_BX_&_Print_패키지_키스립.html" 
+           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            키스립
+        </a>
+    </li>
+    
+    
+</ul>
+
+        </div>
+        
+    </li>
+    
+    
+    
+    <li class="group/d2 relative">
+        <a href="3_BX_&_Print_포스터.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            포스터
+        </a>
+        
+    </li>
+    
+    
+</ul>
+
+        </div>
+        
+    </li>
+    
+    
+    
+    <li class="group/d1 relative">
+        <a href="4_Career.html" 
+           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
+            4 Career
+        </a>
+        
+    </li>
+    
+    
+    
+    <li class="group/d1 relative">
+        <a href="5_Ai.html" 
+           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
+            5 Ai
+        </a>
+        
+    </li>
+    
+    
+</ul>
+
+
+                </nav>
+            </div>
+            
+            <div class="p-8 border-t border-gray-100 mt-auto">
+                <p class="text-xs font-semibold tracking-wider text-gray-500 uppercase">
+                    lee ah young &nbsp;|&nbsp; 010.4788.1301
+                </p>
+            </div>
+        </aside>
+
+        <!-- Right Content Area -->
+        <main class="flex-1 scrollable-content flex flex-col relative">
+            
+                <!-- Breadcrumb -->
+                <div class="sticky top-0 bg-white/90 backdrop-blur border-b border-gray-200 p-6 z-20">
+                    <div class="text-sm font-semibold text-gray-500">
+                        <span class="text-gray-400">Category / </span>
+                        <span class="text-gray-900">쇼핑백</span>
+                    </div>
+                </div>
+            
+            
+            
+                <!-- 서브페이지 동적 콘텐츠 -->
+                <div class="p-10 flex-1">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
+    
+    
+    <div class="cursor-pointer group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center"
+         onclick="openLightbox('../3 BX & Print/쇼핑백/3.JPG', '3.JPG')">
+        <img src="../3 BX & Print/쇼핑백/3.JPG" alt="3.JPG" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        
+        <!-- Hover Overlay -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+            <span class="text-white text-sm font-semibold text-center break-words transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">3.JPG</span>
+        </div>
+    </div>
+    
+    
+    
+    <div class="cursor-pointer group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center"
+         onclick="openLightbox('../3 BX & Print/쇼핑백/나클리닉-쇼핑백.jpg', '나클리닉-쇼핑백.jpg')">
+        <img src="../3 BX & Print/쇼핑백/나클리닉-쇼핑백.jpg" alt="나클리닉-쇼핑백.jpg" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        
+        <!-- Hover Overlay -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+            <span class="text-white text-sm font-semibold text-center break-words transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">나클리닉-쇼핑백.jpg</span>
+        </div>
+    </div>
+    
+    
+    
+    <div class="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center">
+        <div class="flex flex-col items-center justify-center p-4 text-center">
+            <svg class="w-12 h-12 text-red-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            <span class="text-sm font-medium text-gray-600 truncate w-full px-2">나클리닉-쇼핑백.pdf</span>
+        </div>
+        <!-- Link to PDF -->
+        <a href="../3 BX & Print/쇼핑백/나클리닉-쇼핑백.pdf" target="_blank" class="absolute inset-0 z-10"></a>
+    </div>
+    
+    
+    
+    <div class="cursor-pointer group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center"
+         onclick="openLightbox('../3 BX & Print/쇼핑백/나클리닉_쇼핑백.jpg', '나클리닉_쇼핑백.jpg')">
+        <img src="../3 BX & Print/쇼핑백/나클리닉_쇼핑백.jpg" alt="나클리닉_쇼핑백.jpg" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        
+        <!-- Hover Overlay -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+            <span class="text-white text-sm font-semibold text-center break-words transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">나클리닉_쇼핑백.jpg</span>
+        </div>
+    </div>
+    
+    
+    
+    <div class="cursor-pointer group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center"
+         onclick="openLightbox('../3 BX & Print/쇼핑백/나클리닉쇼핑백_2.png', '나클리닉쇼핑백_2.png')">
+        <img src="../3 BX & Print/쇼핑백/나클리닉쇼핑백_2.png" alt="나클리닉쇼핑백_2.png" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        
+        <!-- Hover Overlay -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+            <span class="text-white text-sm font-semibold text-center break-words transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">나클리닉쇼핑백_2.png</span>
+        </div>
+    </div>
+    
+    
+    
+    <div class="cursor-pointer group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center"
+         onclick="openLightbox('../3 BX & Print/쇼핑백/나클리닉쇼핑백칼선.JPG', '나클리닉쇼핑백칼선.JPG')">
+        <img src="../3 BX & Print/쇼핑백/나클리닉쇼핑백칼선.JPG" alt="나클리닉쇼핑백칼선.JPG" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        
+        <!-- Hover Overlay -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+            <span class="text-white text-sm font-semibold text-center break-words transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">나클리닉쇼핑백칼선.JPG</span>
+        </div>
+    </div>
+    
+    
+    
+    <div class="cursor-pointer group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center"
+         onclick="openLightbox('../3 BX & Print/쇼핑백/쇼핑백 칼선.jpg', '쇼핑백 칼선.jpg')">
+        <img src="../3 BX & Print/쇼핑백/쇼핑백 칼선.jpg" alt="쇼핑백 칼선.jpg" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        
+        <!-- Hover Overlay -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+            <span class="text-white text-sm font-semibold text-center break-words transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">쇼핑백 칼선.jpg</span>
+        </div>
+    </div>
+    
+    
+    
+    <div class="cursor-pointer group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center"
+         onclick="openLightbox('../3 BX & Print/쇼핑백/쇼핑백.JPG', '쇼핑백.JPG')">
+        <img src="../3 BX & Print/쇼핑백/쇼핑백.JPG" alt="쇼핑백.JPG" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        
+        <!-- Hover Overlay -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+            <span class="text-white text-sm font-semibold text-center break-words transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">쇼핑백.JPG</span>
+        </div>
+    </div>
+    
+    
+</div>
+
+<!-- Lightbox Modal -->
+<div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center opacity-0 transition-opacity duration-300" onclick="closeLightbox()">
+    <!-- Close Button -->
+    <button class="absolute top-6 right-6 text-white/80 hover:text-white transition-colors p-2 focus:outline-none" aria-label="Close lightbox" onclick="closeLightbox()">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+    
+    <!-- Modal Content -->
+    <div class="relative max-w-[90vw] max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+        <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
+        <p id="lightbox-caption" class="text-white/90 text-sm mt-4 font-semibold tracking-wide text-center"></p>
+    </div>
+</div>
+
+<script>
+function openLightbox(src, title) {
+    const modal = document.getElementById('lightbox-modal');
+    const img = document.getElementById('lightbox-img');
+    const caption = document.getElementById('lightbox-caption');
+    
+    img.src = src;
+    img.alt = title;
+    caption.textContent = title;
+    
+    modal.classList.remove('hidden');
+    // Force a reflow
+    modal.offsetHeight;
+    modal.classList.add('opacity-100');
+    img.classList.remove('scale-95');
+    img.classList.add('scale-100');
+    
+    document.body.classList.add('overflow-hidden');
+}
+
+function closeLightbox() {
+    const modal = document.getElementById('lightbox-modal');
+    const img = document.getElementById('lightbox-img');
+    
+    modal.classList.remove('opacity-100');
+    img.classList.remove('scale-100');
+    img.classList.add('scale-95');
+    
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }, 300);
+}
+
+// Close lightbox on Escape key press
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
+</script>
+                </div>
+            
+        </main>
+        
+    </div>
+</body>
+</html>

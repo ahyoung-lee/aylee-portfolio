@@ -1,0 +1,41 @@
+{% macro render_tree(nodes, depth=1) %}
+<ul class="space-y-1">
+    {% for node in nodes %}
+    {% if depth == 1 %}
+    <li class="group/d1 relative">
+        <a href="{{ node.path | replace('/', '_') | replace(' ', '_') }}.html" 
+           class="block py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
+            {{ node.name }}
+        </a>
+        {% if node.children %}
+        <div class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d1:max-h-[800px] group-hover/d1:opacity-100 group-hover/d1:visible pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
+            {{ render_tree(node.children, depth + 1) }}
+        </div>
+        {% endif %}
+    </li>
+    {% elif depth == 2 %}
+    <li class="group/d2 relative">
+        <a href="{{ node.path | replace('/', '_') | replace(' ', '_') }}.html" 
+           class="block py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            {{ node.name }}
+        </a>
+        {% if node.children %}
+        <div class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d2:max-h-[500px] group-hover/d2:opacity-100 group-hover/d2:visible pl-4 mt-1 border-l border-gray-100 ml-2 mb-1">
+            {{ render_tree(node.children, depth + 1) }}
+        </div>
+        {% endif %}
+    </li>
+    {% else %}
+    <li>
+        <a href="{{ node.path | replace('/', '_') | replace(' ', '_') }}.html" 
+           class="block py-1 px-2 text-xs text-gray-500 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+            {{ node.name }}
+        </a>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endmacro %}
+
+{{ render_tree(tree_data.categories) }}
+
