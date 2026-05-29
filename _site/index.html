@@ -47,10 +47,10 @@
         </button>
     </header>
 
-    <!-- Sidebar Backdrop for Mobile -->
-    <div id="sidebar-backdrop" class="fixed inset-0 z-30 bg-black/40 backdrop-blur-xs hidden md:hidden transition-opacity duration-300 opacity-0" onclick="toggleSidebar(false)"></div>
-
     <div class="flex flex-col md:flex-row h-screen w-full relative z-10 ">
+        
+        <!-- Sidebar Backdrop for Mobile -->
+        <div id="sidebar-backdrop" class="fixed inset-0 z-30 bg-black/40 backdrop-blur-xs hidden md:hidden transition-opacity duration-300 opacity-0" onclick="toggleSidebar(false)"></div>
         
         <!-- Left Sidebar (Navigation) -->
         <aside id="sidebar-nav" class="fixed inset-y-0 left-0 w-72 z-40 bg-white/95 backdrop-blur-md shadow-2xl border-r border-gray-200 flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex md:w-72 md:flex-shrink-0 md:bg-white/90 md:shadow-lg h-full">
@@ -75,7 +75,7 @@
 <ul class="space-y-1">
     
     
-    <li class="relative">
+    <li class="group/d1 relative">
         
             
             <a href="1_Websites.html" 
@@ -87,23 +87,25 @@
     
     
     
-    <li class="relative">
+    <li class="group/d1 relative">
         
             
-            <div class="flex items-center justify-between py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
-                 onclick="toggleSubmenu(event, 'submenu-2_Web_Contents')">
+            <a href="2_Web_Contents.html" 
+               onclick="handleCategoryClick(event, this, 'submenu-2_Web_Contents')"
+               class="flex items-center justify-between py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
                 <span>2 Web Contents</span>
-                <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 md:hidden " fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
-            </div>
+            </a>
             <div id="submenu-2_Web_Contents" 
-                 class="hidden pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
+                 
+                 class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d1:max-h-[800px] group-hover/d1:opacity-100 group-hover/d1:visible pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
                 
 <ul class="space-y-1">
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="2_Web_Contents_랜딩페이지.html" 
@@ -115,7 +117,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="2_Web_Contents_배너.html" 
@@ -127,18 +129,20 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
-            <div class="flex items-center justify-between py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 cursor-pointer transition-colors"
-                 onclick="toggleSubmenu(event, 'submenu-2_Web_Contents_상세페이지')">
+            <a href="2_Web_Contents_상세페이지.html" 
+               onclick="handleCategoryClick(event, this, 'submenu-2_Web_Contents_상세페이지')"
+               class="flex items-center justify-between py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
                 <span>상세페이지</span>
-                <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-200 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-200 md:hidden " fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
-            </div>
+            </a>
             <div id="submenu-2_Web_Contents_상세페이지" 
-                 class="hidden pl-3 mt-1 border-l border-gray-100 ml-2 mb-1">
+                 
+                 class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d2:max-h-[500px] group-hover/d2:opacity-100 group-hover/d2:visible pl-4 mt-1 border-l border-gray-100 ml-2 mb-1">
                 
 <ul class="space-y-1">
     
@@ -190,7 +194,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="2_Web_Contents_웹포스터.html" 
@@ -202,7 +206,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="2_Web_Contents_일러스트.html" 
@@ -221,23 +225,25 @@
     
     
     
-    <li class="relative">
+    <li class="group/d1 relative">
         
             
-            <div class="flex items-center justify-between py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
-                 onclick="toggleSubmenu(event, 'submenu-3_BX_&_Print')">
+            <a href="3_BX_&_Print.html" 
+               onclick="handleCategoryClick(event, this, 'submenu-3_BX_&_Print')"
+               class="flex items-center justify-between py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
                 <span>3 BX & Print</span>
-                <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 md:hidden " fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
-            </div>
+            </a>
             <div id="submenu-3_BX_&_Print" 
-                 class="hidden pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
+                 
+                 class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d1:max-h-[800px] group-hover/d1:opacity-100 group-hover/d1:visible pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
                 
 <ul class="space-y-1">
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="3_BX_&_Print_대소봉투.html" 
@@ -249,7 +255,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="3_BX_&_Print_메뉴판.html" 
@@ -261,7 +267,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="3_BX_&_Print_명함.html" 
@@ -273,7 +279,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="3_BX_&_Print_브로슈어.html" 
@@ -285,7 +291,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="3_BX_&_Print_쇼핑백.html" 
@@ -297,7 +303,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="3_BX_&_Print_쿠폰.html" 
@@ -309,7 +315,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="3_BX_&_Print_티셔츠.html" 
@@ -321,18 +327,20 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
-            <div class="flex items-center justify-between py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 cursor-pointer transition-colors"
-                 onclick="toggleSubmenu(event, 'submenu-3_BX_&_Print_패키지')">
+            <a href="3_BX_&_Print_패키지.html" 
+               onclick="handleCategoryClick(event, this, 'submenu-3_BX_&_Print_패키지')"
+               class="flex items-center justify-between py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
                 <span>패키지</span>
-                <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-200 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-200 md:hidden " fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
-            </div>
+            </a>
             <div id="submenu-3_BX_&_Print_패키지" 
-                 class="hidden pl-3 mt-1 border-l border-gray-100 ml-2 mb-1">
+                 
+                 class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d2:max-h-[500px] group-hover/d2:opacity-100 group-hover/d2:visible pl-4 mt-1 border-l border-gray-100 ml-2 mb-1">
                 
 <ul class="space-y-1">
     
@@ -384,7 +392,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d2 relative">
         
             
             <a href="3_BX_&_Print_포스터.html" 
@@ -403,7 +411,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d1 relative">
         
             
             <a href="4_Career.html" 
@@ -415,7 +423,7 @@
     
     
     
-    <li class="relative">
+    <li class="group/d1 relative">
         
             
             <a href="5_Ai.html" 
@@ -429,24 +437,37 @@
 </ul>
 
 
-<!-- Script to handle click-toggle submenus -->
+<!-- Script to handle click-toggle submenus on mobile while keeping hover on desktop -->
 <script>
-if (typeof toggleSubmenu !== 'function') {
-    window.toggleSubmenu = function(event, id) {
-        if (event) event.stopPropagation();
-        const submenu = document.getElementById(id);
-        if (!submenu) return;
-        
-        // Find the arrow inside the clicked element
-        const clickTarget = event.currentTarget;
-        const arrow = clickTarget.querySelector('svg');
-        
-        if (submenu.classList.contains('hidden')) {
-            submenu.classList.remove('hidden');
-            if (arrow) arrow.classList.add('rotate-180');
-        } else {
-            submenu.classList.add('hidden');
-            if (arrow) arrow.classList.remove('rotate-180');
+if (typeof handleCategoryClick !== 'function') {
+    window.handleCategoryClick = function(event, element, submenuId) {
+        // On mobile (screen width < 768px), prevent navigation and toggle the menu
+        if (window.innerWidth < 768) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            const submenu = document.getElementById(submenuId);
+            if (!submenu) return;
+            
+            const arrow = element.querySelector('svg');
+            
+            // Check if currently expanded by inline styles or CSS hover
+            const isCollapsed = !submenu.style.maxHeight || submenu.style.maxHeight === '0px' || submenu.style.maxHeight === '';
+            
+            if (isCollapsed) {
+                // Expand
+                submenu.style.maxHeight = '1000px';
+                submenu.style.opacity = '1';
+                submenu.style.visibility = 'visible';
+                if (arrow) arrow.classList.add('rotate-180');
+            } else {
+                // Collapse
+                submenu.style.maxHeight = '0px';
+                submenu.style.opacity = '0';
+                submenu.style.visibility = 'hidden';
+                if (arrow) arrow.classList.remove('rotate-180');
+            }
         }
     };
 }
