@@ -24,11 +24,16 @@ def rich_text_to_html(raw_text):
     formatted_html = []
     
     i = 0
+    consecutive_empty = 0
     while i < len(lines):
         line = lines[i]
         if not line:
+            consecutive_empty += 1
+            if consecutive_empty == 2 and i > 0 and i < len(lines) - 1:
+                formatted_html.append('<div class="h-10"></div>')
             i += 1
             continue
+        consecutive_empty = 0
             
         list_match = re.match(r'^(\d+)\.\s*(.*)', line)
         bullet_match = re.match(r'^([-●*])\s*(.*)', line)

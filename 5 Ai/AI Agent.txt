@@ -31,6 +31,7 @@ instagram-auto-system
 └── script_instagram.py  # Meta Graph API 다중 컨테이너 생성 및 Carousel 최종 퍼블리싱 모듈
 
 
+
 2. 포트폴리오 폴더링 자동화 사이트 제작 
 -폴더 생성시 분류 추가
 -폴더 내 이미지 보관 시 자동 업로드 
