@@ -550,7 +550,72 @@ if (typeof handleCategoryClick !== 'function') {
             
                 <!-- 서브페이지 동적 콘텐츠 -->
                 <div class="p-5 md:p-10 flex-1">
-                    <div class='p-8 text-gray-500'>Empty category.</div>
+                    <article class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-8 mb-4 md:mb-8 max-w-4xl hover:shadow-md transition-shadow">
+    <header class="mb-4 md:mb-6 pb-4 md:pb-6 border-b border-gray-100">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900">AI Agent</h2>
+    </header>
+    <div class="prose prose-lg text-gray-700 max-w-none">
+        <div class="space-y-1">
+                <div class="flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0">1</span>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-900 text-lg leading-snug">인스타그램 컨텐츠 자동화 사이트 [개발중]</h4>
+                    </div>
+                </div>
+                
+<p class="text-base text-gray-700 leading-relaxed mb-4">Github, render, 구글antigravity, Gemini pro</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">폴더구조</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">instagram-auto-system</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">│</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">├── index.html         # 모바일 최적화 및 Flexbox 기반 메인 UI 대시보드</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">├── style.css      # CSS Custom Properties 및 768px 미디어 쿼리 포함 스타일시트</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">├── main.js          # 3시간 타이머 제어, CSS 변수 조작, 비동기 API 오케스트레이션</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">├── .gitignore          # .env, save/, pycache/ 유출 차단용 Git 설정</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">├── .env                   # OpenAI 및 Meta Graph API 보안 인증 키 세트</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">│</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">└── src/                     # 백엔드 엔진 코어 (Python 3.11+ / FastAPI 아키텍처)</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">├── app.py               # 백엔드 오케스트레이터 웹 서버 및 CORS 관리 API 엔드포인트</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">├── agent_trend.py       # [서브에이전트 1] URL 크롤링 및 실시간 트렌드 기사 추출 모듈</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">├── agent_creative.py    # [서브에이전트 2] 뉴스 분석, 4:5 카드 기획 및 수익화 캡션 생성 LLM</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">├── script_vision.py     # Pillow 활용 이미지 생성, 4:5 가변 레이아웃, 상대 휘도 워터마크 합성</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">└── script_instagram.py  # Meta Graph API 다중 컨테이너 생성 및 Carousel 최종 퍼블리싱 모듈</p>
+
+                <div class="flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0">2</span>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-900 text-lg leading-snug">포트폴리오 폴더링 자동화 사이트 제작</h4>
+                    </div>
+                </div>
+                
+
+            <div class="flex items-start gap-2 pl-4 mb-2 text-gray-700">
+                <span class="text-blue-500 flex-shrink-0 mt-1.5">•</span>
+                <span class="text-base leading-relaxed">폴더 생성시 분류 추가</span>
+            </div>
+            
+
+            <div class="flex items-start gap-2 pl-4 mb-2 text-gray-700">
+                <span class="text-blue-500 flex-shrink-0 mt-1.5">•</span>
+                <span class="text-base leading-relaxed">폴더 내 이미지 보관 시 자동 업로드</span>
+            </div>
+            
+<p class="text-base text-gray-700 leading-relaxed mb-4">워크플로우</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">[STATUS: IDLE]</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">⬇ (로컬/원격 폴더 내 트리 구조 또는 파일 변경 발생)</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">[STATUS: TRIGGERED]</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">⬇ (폴더 계층 탐색 수행 및 변경 감지)</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">[STATUS: TREE_PARSING] ➔ 중첩 깊이 분석 (대분류 ➔ 중분류 ➔ 소분류 매핑)</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">⬇ (파일 수준 검증 진입)</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">[STATUS: VALIDATING] ➔ 확장자 유효성 검사 (jpg, png, gif, pdf, txt 여부 판별)</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">⬇ (유효 확장자 매칭 완료)</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">[STATUS: CONTEXT_PARSING] ➔ profile.txt 파싱 및 블로그 콘텐트 문맥 구조화 (LLM)</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">⬇ (HTML 컴파일링 가동)</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">[STATUS: BUILDING] ➔ 다계층 내비게이션 DOM 생성 및 갤러리/블로그 템플릿 빌드</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">⬇ (빌드 무결성 검증 완료)</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">[STATUS: DEPLOYED] ➔ 사이트 최종 갱신 후 [STATUS: IDLE]로 복귀</p>
+<p class="text-base text-gray-700 leading-relaxed mb-4">사이트 : <a href="https://ahyoung-lee.github.io/aylee-portfolio/_site/index.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline font-semibold break-all mt-1 gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>https://ahyoung-lee.github.io/aylee-portfolio/_site/index.html</a></p></div>
+    </div>
+</article>
                 </div>
             
         </main>
