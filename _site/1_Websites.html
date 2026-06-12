@@ -30,6 +30,19 @@
         /* Custom Scrollbar for inner content */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900">
@@ -564,6 +577,7 @@ if (typeof handleCategoryClick !== 'function') {
                     </div>
                 </div>
                 
+<div class="h-10"></div>
 
                 <div class="flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0">2</span>
@@ -573,6 +587,7 @@ if (typeof handleCategoryClick !== 'function') {
                     </div>
                 </div>
                 
+<div class="h-10"></div>
 
                 <div class="flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0">3</span>
@@ -582,6 +597,7 @@ if (typeof handleCategoryClick !== 'function') {
                     </div>
                 </div>
                 
+<div class="h-10"></div>
 
                 <div class="flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0">4</span>
@@ -591,6 +607,7 @@ if (typeof handleCategoryClick !== 'function') {
                     </div>
                 </div>
                 
+<div class="h-10"></div>
 
                 <div class="flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow">
                     <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0">5</span>

@@ -30,6 +30,19 @@
         /* Custom Scrollbar for inner content */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900">
@@ -543,7 +556,7 @@ if (typeof handleCategoryClick !== 'function') {
                 <!-- 메인 페이지일 때만 우측에 프로필 렌더링 -->
                 <div class="flex-1 flex flex-col justify-center items-center md:items-end p-6 md:p-16 lg:p-24 h-full min-h-[calc(100vh-64px)] md:min-h-[calc(100vh-80px)] relative z-10">
                     <!-- Profile Card on the Right -->
-                    <div class="bg-black/55 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-10 text-white max-w-md w-full shadow-2xl hover:shadow-cyan-500/10 hover:border-white/30 transition-all duration-500 transform hover:-translate-y-1">
+                    <div class="bg-black/55 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-10 text-white max-w-md w-full shadow-2xl hover:shadow-cyan-500/20 hover:border-white/40 transition-all duration-500 animate-float">
                         <!-- Accent Line -->
                         <div class="w-12 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mb-6 rounded-full"></div>
                         
