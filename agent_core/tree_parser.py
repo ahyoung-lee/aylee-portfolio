@@ -1,5 +1,6 @@
 import os
 import json
+import unicodedata
 
 SUPPORTED_MEDIA = {'.jpg', '.png', '.gif', '.pdf'}
 SUPPORTED_TEXT = {'.txt'}
@@ -49,8 +50,8 @@ def get_file_info(file_path, rel_path):
             return None
             
         return {
-            "name": os.path.basename(file_path),
-            "path": rel_path.replace("\\", "/"),
+            "name": unicodedata.normalize('NFC', os.path.basename(file_path)),
+            "path": unicodedata.normalize('NFC', rel_path.replace("\\", "/")),
             "type": file_type,
             "ext": ext,
             "mtime": os.path.getmtime(file_path)
@@ -134,8 +135,8 @@ def build_full_tree(root_dir):
             full_path = os.path.join(root_dir, folder)
             children = _parse_recursive(root_dir, full_path, 1)
             categories.append({
-                "name": folder,
-                "path": folder.replace("\\", "/"),
+                "name": unicodedata.normalize('NFC', folder),
+                "path": unicodedata.normalize('NFC', folder.replace("\\", "/")),
                 "children": children.get("children", []),
                 "files": children.get("files", [])
             })
@@ -165,8 +166,8 @@ def _parse_recursive(root_dir, current_dir, depth):
             rel_path = os.path.relpath(full_path, root_dir)
             child_data = _parse_recursive(root_dir, full_path, depth + 1)
             children.append({
-                "name": folder,
-                "path": rel_path.replace("\\", "/"),
+                "name": unicodedata.normalize('NFC', folder),
+                "path": unicodedata.normalize('NFC', rel_path.replace("\\", "/")),
                 "children": child_data.get("children", []),
                 "files": child_data.get("files", [])
             })
