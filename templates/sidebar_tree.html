@@ -1,0 +1,104 @@
+{% macro render_tree(nodes, depth=1) %}
+<ul class="space-y-1">
+    {% for node in nodes %}
+    {% if depth == 1 %}
+    <li class="group/d1 relative">
+        {% if node.children %}
+            {% set is_active_branch = current_node and current_node.path.startswith(node.path) %}
+            <a href="{{ node.path | replace('/', '_') | replace(' ', '_') }}.html" 
+               onclick="handleCategoryClick(event, this, 'submenu-{{ node.path | replace('/', '_') | replace(' ', '_') }}')"
+               class="flex items-center justify-between py-2 px-3 text-sm font-bold text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                <span>{{ node.name }}</span>
+                <svg class="w-4 h-4 text-gray-500 transition-transform duration-200 md:hidden {% if is_active_branch %}rotate-180{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </a>
+            <div id="submenu-{{ node.path | replace('/', '_') | replace(' ', '_') }}" 
+                 {% if is_active_branch %} style="max-height: 1000px; opacity: 1; visibility: visible;" {% endif %}
+                 class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d1:max-h-[800px] group-hover/d1:opacity-100 group-hover/d1:visible pl-4 mt-1 border-l border-gray-100 ml-3 mb-2">
+                {{ render_tree(node.children, depth + 1) }}
+            </div>
+        {% else %}
+            {% set is_active_page = current_node and current_node.path == node.path %}
+            <a href="{{ node.path | replace('/', '_') | replace(' ', '_') }}.html" 
+               class="block py-2 px-3 text-sm font-bold rounded-lg transition-all duration-200 {% if is_active_page %}bg-blue-50 text-blue-600{% else %}text-gray-900 hover:bg-gray-50{% endif %}">
+                {{ node.name }}
+            </a>
+        {% endif %}
+    </li>
+    {% elif depth == 2 %}
+    <li class="group/d2 relative">
+        {% if node.children %}
+            {% set is_active_branch = current_node and current_node.path.startswith(node.path) %}
+            <a href="{{ node.path | replace('/', '_') | replace(' ', '_') }}.html" 
+               onclick="handleCategoryClick(event, this, 'submenu-{{ node.path | replace('/', '_') | replace(' ', '_') }}')"
+               class="flex items-center justify-between py-1.5 px-2 text-sm text-gray-600 rounded-md hover:text-black hover:bg-gray-50 transition-all duration-200">
+                <span>{{ node.name }}</span>
+                <svg class="w-3.5 h-3.5 text-gray-400 transition-transform duration-200 md:hidden {% if is_active_branch %}rotate-180{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </a>
+            <div id="submenu-{{ node.path | replace('/', '_') | replace(' ', '_') }}" 
+                 {% if is_active_branch %} style="max-height: 1000px; opacity: 1; visibility: visible;" {% endif %}
+                 class="max-h-0 opacity-0 invisible overflow-hidden transition-all duration-500 ease-in-out group-hover/d2:max-h-[500px] group-hover/d2:opacity-100 group-hover/d2:visible pl-4 mt-1 border-l border-gray-100 ml-2 mb-1">
+                {{ render_tree(node.children, depth + 1) }}
+            </div>
+        {% else %}
+            {% set is_active_page = current_node and current_node.path == node.path %}
+            <a href="{{ node.path | replace('/', '_') | replace(' ', '_') }}.html" 
+               class="block py-1.5 px-2 text-sm rounded-md transition-all duration-200 {% if is_active_page %}bg-blue-50 text-blue-600 font-semibold{% else %}text-gray-600 hover:text-black hover:bg-gray-50{% endif %}">
+                {{ node.name }}
+            </a>
+        {% endif %}
+    </li>
+    {% else %}
+    <li>
+        {% set is_active_page = current_node and current_node.path == node.path %}
+        <a href="{{ node.path | replace('/', '_') | replace(' ', '_') }}.html" 
+           class="block py-1 px-2 text-xs rounded-md transition-all duration-200 {% if is_active_page %}text-blue-600 font-bold{% else %}text-gray-500 hover:text-black hover:bg-gray-50{% endif %}">
+            {{ node.name }}
+        </a>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endmacro %}
+
+{{ render_tree(tree_data.categories) }}
+
+<!-- Script to handle click-toggle submenus on mobile while keeping hover on desktop -->
+<script>
+if (typeof handleCategoryClick !== 'function') {
+    window.handleCategoryClick = function(event, element, submenuId) {
+        // On mobile (screen width < 768px), prevent navigation and toggle the menu
+        if (window.innerWidth < 768) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            const submenu = document.getElementById(submenuId);
+            if (!submenu) return;
+            
+            const arrow = element.querySelector('svg');
+            
+            // Check if currently expanded by inline styles or CSS hover
+            const isCollapsed = !submenu.style.maxHeight || submenu.style.maxHeight === '0px' || submenu.style.maxHeight === '';
+            
+            if (isCollapsed) {
+                // Expand
+                submenu.style.maxHeight = '1000px';
+                submenu.style.opacity = '1';
+                submenu.style.visibility = 'visible';
+                if (arrow) arrow.classList.add('rotate-180');
+            } else {
+                // Collapse
+                submenu.style.maxHeight = '0px';
+                submenu.style.opacity = '0';
+                submenu.style.visibility = 'hidden';
+                if (arrow) arrow.classList.remove('rotate-180');
+            }
+        }
+    };
+}
+</script>
+
