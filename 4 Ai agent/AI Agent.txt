@@ -1,12 +1,22 @@
 *Ai 에이전트 에이전트 구조 분석 및 AI 워크플로우 과정 학습 진행중 (2026.5.6~)
- →Github, n8n, 노트북LM, Chatgpt, Gemini, Notion, Slack, 구글antigravity, 클로드, 코덱스 등 사용
+ →Github, n8n, 노트북LM, Chatgpt, Gemini, Notion, Slack, 구글antigravity, 클로드, 등 사용
  →ai 에이전트 구조 및 개발 방법론 등 이론 숙지
  →에이전트 설계서 작성 및 시스템 프롬프트 설계
-
-1. 인스타그램 컨텐츠 자동화 사이트 [개발중]
-Github, render, 구글antigravity, Gemini pro 
-
-폴더구조
+<br>
+1. 인스타그램 컨텐츠 자동화 사이트 제작 완료
+- https://www.instagram.com/alwaysg00d/
+- 사용 툴 : Github, render, 구글antigravity, Gemini pro, Claude
+- 제작 과정
+에이전트 설계서 작성 > 수정작업 > OpenAI API 토큰 결제 연결 > 메타 API (자동발행 위함) 
+- URL 입력 후 생성 버튼 클릭시 내용 파악 후 이미지 + 제목 + 기사 + 캡션 해시태그 자동 생성
+- URL 입력 하지 않고 생성 버튼 클릭 시 실시간 이슈, 뉴스 데이터를 트리거 하여 자동 선택 후 생성
+- 인스타그램에 업로드 까지 설계 했으나 계정 삭제 이슈로 이미지 저장 후 수동 등록
+- 생성 버튼 클릭시 달러 소모로 URL 비공개
+<br>
+메인페이지
+<instagram img>
+<br>
+-폴더구조
 instagram-auto-system
 
 │
@@ -39,8 +49,9 @@ instagram-auto-system
 
 2. 포트폴리오 폴더링 자동화 사이트 제작 완료
 -폴더 생성시 분류 추가
--폴더 내 이미지 보관 시 자동 업로드 
-
+-폴더 내 이미지 드래그 시 자동 업로드 
+-깃 허브 & 로컬 폴더 동기화 
+<br>
 워크플로우
 [STATUS: IDLE]
 ⬇ (로컬/원격 폴더 내 트리 구조 또는 파일 변경 발생)

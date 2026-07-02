@@ -9,23 +9,81 @@ def setup_llm():
     genai.configure(api_key=api_key)
     return True
 
-def rich_text_to_html(raw_text):
+def _resolve_media(key, media_files):
+    """Match an inline marker like 'instagram img' to a media file in the folder."""
+    import re
+    import os
+
+    def norm(s):
+        return re.sub(r'\s+', ' ', s).strip().lower()
+
+    target = norm(key)
+    # 1) exact match on filename without extension
+    for mf in media_files:
+        base = os.path.splitext(mf['name'])[0]
+        if norm(base) == target:
+            return mf
+    # 2) fallback: one contains the other
+    for mf in media_files:
+        base = norm(os.path.splitext(mf['name'])[0])
+        if target and (target in base or base in target):
+            return mf
+    return None
+
+
+def rich_text_to_html(raw_text, media_files=None, root_path="../"):
     import re
     import html
-    
-    escaped_text = html.escape(raw_text)
+
+    media_files = media_files or []
+    used_media = []
     url_pattern = re.compile(r'(https?://[^\s\n]+)')
-    
+
     def make_link(match):
         url = match.group(1)
         return f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline font-semibold break-all mt-1 gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>{url}</a>'
-    
-    lines = [line.strip() for line in escaped_text.split('\n')]
+
+    raw_lines = [line.strip() for line in raw_text.split('\n')]
+    lines = [html.escape(line) for line in raw_lines]
     formatted_html = []
-    
+    last_url = None  # most recent URL, used as click target for inline images
+
     i = 0
     consecutive_empty = 0
     while i < len(lines):
+        raw_line = raw_lines[i]
+
+        # Marker: <br>  ->  line break / vertical gap
+        if raw_line.lower() == '<br>':
+            formatted_html.append('<div class="h-6"></div>')
+            consecutive_empty = 0
+            i += 1
+            continue
+
+        # Marker: <xxx img>  ->  insert matching image from the same folder
+        marker_match = re.match(r'^<\s*(.+?)\s*>$', raw_line)
+        if marker_match and media_files:
+            mf = _resolve_media(marker_match.group(1), media_files)
+            if mf:
+                used_media.append(mf['name'])
+                src = html.escape(f"{root_path}{mf['path']}")
+                alt = html.escape(mf['name'])
+                img_tag = (
+                    f'<img src="{src}" alt="{alt}" loading="lazy" '
+                    f'class="w-full max-w-2xl md:max-w-3xl h-auto rounded-xl shadow-md border border-gray-100">'
+                )
+                if last_url:
+                    inner = (
+                        f'<a href="{html.escape(last_url)}" target="_blank" rel="noopener noreferrer" '
+                        f'class="block hover:opacity-90 transition-opacity">{img_tag}</a>'
+                    )
+                else:
+                    inner = img_tag
+                formatted_html.append(f'<div class="my-6 flex justify-center">{inner}</div>')
+                consecutive_empty = 0
+                i += 1
+                continue
+
         line = lines[i]
         if not line:
             consecutive_empty += 1
@@ -34,7 +92,12 @@ def rich_text_to_html(raw_text):
             i += 1
             continue
         consecutive_empty = 0
-            
+
+        # Remember the most recent URL so a following image can link to it
+        url_here = url_pattern.search(raw_line)
+        if url_here:
+            last_url = url_here.group(1)
+
         list_match = re.match(r'^(\d+)\.\s*(.*)', line)
         bullet_match = re.match(r'^([-●*])\s*(.*)', line)
         
@@ -49,7 +112,10 @@ def rich_text_to_html(raw_text):
             if j < len(lines) and url_pattern.match(lines[j]):
                 next_url = lines[j]
                 i = j
-                
+                merged_url = url_pattern.search(next_url)
+                if merged_url:
+                    last_url = merged_url.group(1)
+
             title_with_links = url_pattern.sub(make_link, title)
             if next_url:
                 link_html = url_pattern.sub(make_link, next_url)
@@ -94,18 +160,22 @@ def rich_text_to_html(raw_text):
                     formatted_html.append(f'<p class="text-base text-gray-700 leading-relaxed mb-4">{line_with_links}</p>')
         i += 1
         
-    return '<div class="space-y-1">' + "\n".join(formatted_html) + '</div>'
+    html_out = '<div class="space-y-1">' + "\n".join(formatted_html) + '</div>'
+    return html_out, used_media
 
-def parse_text_content(file_path):
+def parse_text_content(file_path, media_files=None, root_path="../"):
+    media_files = media_files or []
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             raw_text = f.read()
             
         if not setup_llm():
             filename = os.path.splitext(os.path.basename(file_path))[0]
+            content, used_media = rich_text_to_html(raw_text, media_files, root_path)
             return {
                 "title": filename,
-                "content": rich_text_to_html(raw_text)
+                "content": content,
+                "_used_media": used_media
             }
             
         model = genai.GenerativeModel('gemini-1.5-pro')
@@ -135,7 +205,9 @@ def parse_text_content(file_path):
     except Exception as e:
         print(f"[Error] LLM Parsing failed for {file_path}: {e}")
         filename = os.path.splitext(os.path.basename(file_path))[0]
+        content, used_media = rich_text_to_html(raw_text, media_files, root_path)
         return {
             "title": filename,
-            "content": rich_text_to_html(raw_text)
+            "content": content,
+            "_used_media": used_media
         }

@@ -41,13 +41,27 @@ def _generate_subpages(env, tree_data, categories, out_dir, root_dir):
         media_files = [f for f in cat.get('files', []) if f['type'] == 'media']
         text_files = [f for f in cat.get('files', []) if f['type'] == 'text']
         
-        content_parts = []
-        
-        if media_files:
-            content_parts.append(gallery_tpl.render(files=media_files, root_path="../"))
-            
+        # Parse text first so we know which images are placed inline via markers
+        parsed_posts = []
+        inline_media = set()
         for t_file in text_files:
-            parsed = parse_text_content(os.path.join(root_dir, t_file['path']))
+            parsed = parse_text_content(
+                os.path.join(root_dir, t_file['path']),
+                media_files=media_files,
+                root_path="../"
+            )
+            parsed_posts.append(parsed)
+            inline_media.update(parsed.get('_used_media', []))
+
+        # Images referenced inline are excluded from the gallery grid to avoid duplication
+        gallery_media = [f for f in media_files if f['name'] not in inline_media]
+
+        content_parts = []
+
+        if gallery_media:
+            content_parts.append(gallery_tpl.render(files=gallery_media, root_path="../"))
+
+        for parsed in parsed_posts:
             content_parts.append(blog_tpl.render(post=parsed))
             
         if not content_parts and not cat.get('children'):
