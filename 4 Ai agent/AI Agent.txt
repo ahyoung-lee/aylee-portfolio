@@ -1,0 +1,60 @@
+*Ai 에이전트 에이전트 구조 분석 및 AI 워크플로우 과정 학습 진행중 (2026.5.6~)
+ →Github, n8n, 노트북LM, Chatgpt, Gemini, Notion, Slack, 구글antigravity, 클로드, 코덱스 등 사용
+ →ai 에이전트 구조 및 개발 방법론 등 이론 숙지
+ →에이전트 설계서 작성 및 시스템 프롬프트 설계
+
+1. 인스타그램 컨텐츠 자동화 사이트 [개발중]
+Github, render, 구글antigravity, Gemini pro 
+
+폴더구조
+instagram-auto-system
+
+│
+
+├── index.html         # 모바일 최적화 및 Flexbox 기반 메인 UI 대시보드
+
+├── style.css      # CSS Custom Properties 및 768px 미디어 쿼리 포함 스타일시트
+
+├── main.js          # 3시간 타이머 제어, CSS 변수 조작, 비동기 API 오케스트레이션
+
+├── .gitignore          # .env, save/, pycache/ 유출 차단용 Git 설정
+
+├── .env                   # OpenAI 및 Meta Graph API 보안 인증 키 세트
+
+│
+
+└── src/                     # 백엔드 엔진 코어 (Python 3.11+ / FastAPI 아키텍처)
+
+├── app.py               # 백엔드 오케스트레이터 웹 서버 및 CORS 관리 API 엔드포인트
+
+├── agent_trend.py       # [서브에이전트 1] URL 크롤링 및 실시간 트렌드 기사 추출 모듈
+
+├── agent_creative.py    # [서브에이전트 2] 뉴스 분석, 4:5 카드 기획 및 수익화 캡션 생성 LLM
+
+├── script_vision.py     # Pillow 활용 이미지 생성, 4:5 가변 레이아웃, 상대 휘도 워터마크 합성
+
+└── script_instagram.py  # Meta Graph API 다중 컨테이너 생성 및 Carousel 최종 퍼블리싱 모듈
+
+
+
+2. 포트폴리오 폴더링 자동화 사이트 제작 완료
+-폴더 생성시 분류 추가
+-폴더 내 이미지 보관 시 자동 업로드 
+
+워크플로우
+[STATUS: IDLE]
+⬇ (로컬/원격 폴더 내 트리 구조 또는 파일 변경 발생)
+[STATUS: TRIGGERED]
+⬇ (폴더 계층 탐색 수행 및 변경 감지)
+[STATUS: TREE_PARSING] ➔ 중첩 깊이 분석 (대분류 ➔ 중분류 ➔ 소분류 매핑)
+⬇ (파일 수준 검증 진입)
+[STATUS: VALIDATING] ➔ 확장자 유효성 검사 (jpg, png, gif, pdf, txt 여부 판별)
+⬇ (유효 확장자 매칭 완료)
+[STATUS: CONTEXT_PARSING] ➔ profile.txt 파싱 및 블로그 콘텐트 문맥 구조화 (LLM)
+⬇ (HTML 컴파일링 가동)
+[STATUS: BUILDING] ➔ 다계층 내비게이션 DOM 생성 및 갤러리/블로그 템플릿 빌드
+⬇ (빌드 무결성 검증 완료)
+[STATUS: DEPLOYED] ➔ 사이트 최종 갱신 후 [STATUS: IDLE]로 복귀
+
+사이트 : https://ahyoung-lee.github.io/aylee-portfolio/_site/index.html
+
