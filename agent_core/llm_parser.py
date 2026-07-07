@@ -52,21 +52,18 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../", base_path="")
         label = html.escape(fname)
         ext = os.path.splitext(fname)[1].lower()
 
-        # Image link -> open in the shared lightbox popup (defined in layout.html)
+        # Image link -> open the original-size image in a new tab
         if ext in image_exts:
             mf = _resolve_media(os.path.splitext(fname)[0], media_files)
             if mf:
                 used_media.append(mf['name'])
                 rel = mf['path']
-                caption = mf['name']
             else:
                 rel = f"{base_path}/{fname}" if base_path else fname
-                caption = fname
-            src = html.escape(f"{root_path}{rel}")
-            cap = html.escape(caption)
+            href = html.escape(f"{root_path}{rel}")
             return (
-                f'<a href="{src}" onclick="openLightbox(\'{src}\', \'{cap}\'); return false;" '
-                f'class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline font-semibold gap-1 cursor-pointer">'
+                f'<a href="{href}" target="_blank" rel="noopener noreferrer" '
+                f'class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline font-semibold gap-1">'
                 f'<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>{label}</a>'
             )
 
@@ -144,36 +141,55 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../", base_path="")
             title = list_match.group(2)
             is_sub = '-' in num
 
-            next_url = ""
+            # Gather following detail lines (e.g. "웹사이트 : ...", "메인 : ...")
+            # into this card. Stop at a blank line, a new numbered item, a
+            # bullet, a <br>, or a standalone <...> marker so other blocks and
+            # pages are unaffected.
+            detail_htmls = []
             j = i + 1
-            while j < len(lines) and not lines[j]:
+            while j < len(lines):
+                esc_j = lines[j]
+                raw_j = raw_lines[j]
+                if (not esc_j
+                        or raw_j.lower() == '<br>'
+                        or re.match(r'^<\s*.+?\s*>$', raw_j)
+                        or re.match(r'^\d+(?:-\d+)*\.', esc_j)
+                        or re.match(r'^[-●*]', esc_j)):
+                    break
+                u = url_pattern.search(raw_j)
+                if u:
+                    last_url = u.group(1)
+                detail_htmls.append(apply_inline(esc_j))
                 j += 1
-            if j < len(lines) and url_pattern.match(lines[j]):
-                next_url = lines[j]
-                i = j
-                merged_url = url_pattern.search(next_url)
-                if merged_url:
-                    last_url = merged_url.group(1)
+            i = j - 1  # main loop advances with i += 1
 
             title_with_links = apply_inline(title)
-            link_html = url_pattern.sub(make_link, next_url) if next_url else ""
-            inner_link = f'<div class="mt-1">{link_html}</div>' if next_url else ''
 
             if is_sub:
                 wrapper_cls = "flex items-start gap-3 p-3.5 mb-2 ml-6 md:ml-10 bg-white border border-gray-100 rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-sm"
                 badge_cls = "flex items-center justify-center min-w-[2.25rem] h-6 px-2 rounded-full bg-blue-50/70 text-blue-500 font-bold text-xs flex-shrink-0"
                 title_cls = "font-semibold text-gray-800 text-base leading-snug"
+                detail_cls = "text-sm text-gray-600"
             else:
                 wrapper_cls = "flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow"
                 badge_cls = "flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0"
                 title_cls = "font-bold text-gray-900 text-lg leading-snug"
+                detail_cls = "text-sm md:text-base text-gray-600"
+
+            if detail_htmls:
+                items = "\n".join(
+                    f'<div class="{detail_cls} break-words">{d}</div>' for d in detail_htmls
+                )
+                detail_block = f'<div class="mt-2 space-y-1">{items}</div>'
+            else:
+                detail_block = ''
 
             formatted_html.append(f'''
             <div class="{wrapper_cls}">
                 <span class="{badge_cls}">{num}</span>
-                <div class="flex-1">
+                <div class="flex-1 min-w-0">
                     <h4 class="{title_cls}">{title_with_links}</h4>
-                    {inner_link}
+                    {detail_block}
                 </div>
             </div>
             ''')
