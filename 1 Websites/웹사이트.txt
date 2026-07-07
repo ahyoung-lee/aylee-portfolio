@@ -2,7 +2,6 @@
 웹사이트 : https://naclinic.co.kr
 메인 : <링크 : 청담나의원메인.jpg>
 
-
 1-1. 청담나의원 외국인 전용 페이지 - 영어
 웹사이트 : https://naclinic.co.kr/default/menu3/sub1/sub1_1.php
 
@@ -14,22 +13,21 @@
 <br>
 *외국인 전용 페이지 기획서 <링크 : 피부클리닉기획서.html>
 
-
-2. NAGROUP
-웹사이트 : https://nagroup.co.kr
-메인 : <링크 : 나그룹메인.jpg>
-
-
-3. 나텔레콤
-웹사이트 : https://natelecom.co.kr
-메인 : <링크 : 나텔레콤메인.jpg>
-
-
-4. 상상이상 (원페이지)
+2. 상상이상 (원페이지)
 웹사이트 : https://ss2s.kr
 메인 : <링크 : 상상이상메인.jpg>
 
 
-5. NABIT
+3. NABIT
 웹사이트 : https://nabitrior.com
 메인 : <링크 : 나비트메인.jpg>
+
+
+4. NAGROUP
+웹사이트 : https://nagroup.co.kr
+메인 : <링크 : 나그룹메인.jpg>
+
+
+5. 나텔레콤
+웹사이트 : https://natelecom.co.kr
+메인 : <링크 : 나텔레콤메인.jpg>
