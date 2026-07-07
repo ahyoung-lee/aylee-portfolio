@@ -98,9 +98,16 @@
             {% if current_node %}
                 <!-- Breadcrumb -->
                 <div class="sticky top-0 bg-white/90 backdrop-blur border-b border-gray-200 p-4 md:p-6 z-20">
-                    <div class="text-sm font-semibold text-gray-500">
-                        <span class="text-gray-400">Category / </span>
-                        <span class="text-gray-900">{{ current_node.name }}</span>
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="text-sm font-semibold text-gray-500">
+                            <span class="text-gray-400">Category / </span>
+                            <span class="text-gray-900">{{ current_node.name }}</span>
+                        </div>
+                        {% if current_node.path.startswith('2 Web Contents') %}
+                        <div class="text-xs md:text-sm text-gray-400 text-right leading-snug">
+                            원본사이즈로 보기 : 새탭에서 이미지 열기
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             {% endif %}
