@@ -818,69 +818,70 @@ if (typeof handleCategoryClick !== 'function') {
     
     
 </div>
-
-<!-- Lightbox Modal -->
-<div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center opacity-0 transition-opacity duration-300" onclick="closeLightbox()">
-    <!-- Close Button -->
-    <button class="absolute top-6 right-6 text-white/80 hover:text-white transition-colors p-2 focus:outline-none" aria-label="Close lightbox" onclick="closeLightbox()">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-    </button>
-    
-    <!-- Modal Content -->
-    <div class="relative max-w-[90vw] max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-        <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
-        <p id="lightbox-caption" class="text-white/90 text-sm mt-4 font-semibold tracking-wide text-center"></p>
-    </div>
-</div>
-
-<script>
-function openLightbox(src, title) {
-    const modal = document.getElementById('lightbox-modal');
-    const img = document.getElementById('lightbox-img');
-    const caption = document.getElementById('lightbox-caption');
-    
-    img.src = src;
-    img.alt = title;
-    caption.textContent = title;
-    
-    modal.classList.remove('hidden');
-    // Force a reflow
-    modal.offsetHeight;
-    modal.classList.add('opacity-100');
-    img.classList.remove('scale-95');
-    img.classList.add('scale-100');
-    
-    document.body.classList.add('overflow-hidden');
-}
-
-function closeLightbox() {
-    const modal = document.getElementById('lightbox-modal');
-    const img = document.getElementById('lightbox-img');
-    
-    modal.classList.remove('opacity-100');
-    img.classList.remove('scale-100');
-    img.classList.add('scale-95');
-    
-    setTimeout(() => {
-        modal.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-    }, 300);
-}
-
-// Close lightbox on Escape key press
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeLightbox();
-    }
-});
-</script>
                 </div>
             
         </main>
         
     </div>
+
+    <!-- Lightbox Modal (shared by gallery grid and inline image links) -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center opacity-0 transition-opacity duration-300" onclick="closeLightbox()">
+        <!-- Close Button -->
+        <button class="absolute top-6 right-6 text-white/80 hover:text-white transition-colors p-2 focus:outline-none" aria-label="Close lightbox" onclick="closeLightbox()">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <!-- Modal Content -->
+        <div class="relative max-w-[90vw] max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
+            <p id="lightbox-caption" class="text-white/90 text-sm mt-4 font-semibold tracking-wide text-center"></p>
+        </div>
+    </div>
+
+    <!-- Lightbox Script -->
+    <script>
+    function openLightbox(src, title) {
+        const modal = document.getElementById('lightbox-modal');
+        const img = document.getElementById('lightbox-img');
+        const caption = document.getElementById('lightbox-caption');
+
+        img.src = src;
+        img.alt = title;
+        caption.textContent = title;
+
+        modal.classList.remove('hidden');
+        // Force a reflow
+        modal.offsetHeight;
+        modal.classList.add('opacity-100');
+        img.classList.remove('scale-95');
+        img.classList.add('scale-100');
+
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeLightbox() {
+        const modal = document.getElementById('lightbox-modal');
+        const img = document.getElementById('lightbox-img');
+
+        modal.classList.remove('opacity-100');
+        img.classList.remove('scale-100');
+        img.classList.add('scale-95');
+
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }, 300);
+    }
+
+    // Close lightbox on Escape key press
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+    </script>
 
     <!-- Toggle Menu Script -->
     <script>

@@ -45,11 +45,34 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../", base_path="")
         url = match.group(1)
         return f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline font-semibold break-all mt-1 gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>{url}</a>'
 
+    image_exts = ('.jpg', '.jpeg', '.png', '.gif', '.webp')
+
     def make_doc_link(match):
         fname = html.unescape(match.group(1)).strip()
+        label = html.escape(fname)
+        ext = os.path.splitext(fname)[1].lower()
+
+        # Image link -> open in the shared lightbox popup (defined in layout.html)
+        if ext in image_exts:
+            mf = _resolve_media(os.path.splitext(fname)[0], media_files)
+            if mf:
+                used_media.append(mf['name'])
+                rel = mf['path']
+                caption = mf['name']
+            else:
+                rel = f"{base_path}/{fname}" if base_path else fname
+                caption = fname
+            src = html.escape(f"{root_path}{rel}")
+            cap = html.escape(caption)
+            return (
+                f'<a href="{src}" onclick="openLightbox(\'{src}\', \'{cap}\'); return false;" '
+                f'class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline font-semibold gap-1 cursor-pointer">'
+                f'<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>{label}</a>'
+            )
+
+        # Non-image document link -> open in a new tab
         rel = f"{base_path}/{fname}" if base_path else fname
         href = html.escape(f"{root_path}{rel}")
-        label = html.escape(fname)
         return f'<a href="{href}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline font-semibold gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>{label}</a>'
 
     def apply_inline(text):
