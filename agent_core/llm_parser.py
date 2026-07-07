@@ -31,17 +31,31 @@ def _resolve_media(key, media_files):
     return None
 
 
-def rich_text_to_html(raw_text, media_files=None, root_path="../"):
+def rich_text_to_html(raw_text, media_files=None, root_path="../", base_path=""):
     import re
     import html
 
     media_files = media_files or []
     used_media = []
     url_pattern = re.compile(r'(https?://[^\s\n]+)')
+    # Inline marker for a document link inside a folder, e.g. <링크 : 피부클리닉기획서.html>
+    doc_pattern = re.compile(r'&lt;\s*링크\s*[:：]?\s*(.+?)\s*&gt;')
 
     def make_link(match):
         url = match.group(1)
         return f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline font-semibold break-all mt-1 gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>{url}</a>'
+
+    def make_doc_link(match):
+        fname = html.unescape(match.group(1)).strip()
+        rel = f"{base_path}/{fname}" if base_path else fname
+        href = html.escape(f"{root_path}{rel}")
+        label = html.escape(fname)
+        return f'<a href="{href}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:underline font-semibold gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>{label}</a>'
+
+    def apply_inline(text):
+        text = url_pattern.sub(make_link, text)
+        text = doc_pattern.sub(make_doc_link, text)
+        return text
 
     raw_lines = [line.strip() for line in raw_text.split('\n')]
     lines = [html.escape(line) for line in raw_lines]
@@ -116,7 +130,7 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../"):
                 if merged_url:
                     last_url = merged_url.group(1)
 
-            title_with_links = url_pattern.sub(make_link, title)
+            title_with_links = apply_inline(title)
             if next_url:
                 link_html = url_pattern.sub(make_link, next_url)
                 formatted_html.append(f'''
@@ -140,7 +154,7 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../"):
         elif bullet_match:
             bullet_char = bullet_match.group(1)
             content = bullet_match.group(2)
-            content_with_links = url_pattern.sub(make_link, content)
+            content_with_links = apply_inline(content)
             formatted_html.append(f'''
             <div class="flex items-start gap-2 pl-4 mb-2 text-gray-700">
                 <span class="text-blue-500 flex-shrink-0 mt-1.5">•</span>
@@ -152,7 +166,7 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../"):
                 link_html = url_pattern.sub(make_link, line)
                 formatted_html.append(f'<div class="mb-4 pl-4">{link_html}</div>')
             else:
-                line_with_links = url_pattern.sub(make_link, line)
+                line_with_links = apply_inline(line)
                 if line.startswith('●') and line.endswith('●'):
                     title_text = line.strip('●')
                     formatted_html.append(f'<h3 class="text-xl font-bold text-gray-900 mt-6 mb-4 pb-2 border-b border-gray-100 flex items-center gap-2"><span class="w-1.5 h-6 bg-blue-600 rounded-full"></span>{title_text}</h3>')
@@ -163,15 +177,15 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../"):
     html_out = '<div class="space-y-1">' + "\n".join(formatted_html) + '</div>'
     return html_out, used_media
 
-def parse_text_content(file_path, media_files=None, root_path="../"):
+def parse_text_content(file_path, media_files=None, root_path="../", base_path=""):
     media_files = media_files or []
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             raw_text = f.read()
-            
+
         if not setup_llm():
             filename = os.path.splitext(os.path.basename(file_path))[0]
-            content, used_media = rich_text_to_html(raw_text, media_files, root_path)
+            content, used_media = rich_text_to_html(raw_text, media_files, root_path, base_path)
             return {
                 "title": filename,
                 "content": content,
@@ -205,7 +219,7 @@ def parse_text_content(file_path, media_files=None, root_path="../"):
     except Exception as e:
         print(f"[Error] LLM Parsing failed for {file_path}: {e}")
         filename = os.path.splitext(os.path.basename(file_path))[0]
-        content, used_media = rich_text_to_html(raw_text, media_files, root_path)
+        content, used_media = rich_text_to_html(raw_text, media_files, root_path, base_path)
         return {
             "title": filename,
             "content": content,

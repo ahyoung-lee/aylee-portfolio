@@ -48,7 +48,8 @@ def _generate_subpages(env, tree_data, categories, out_dir, root_dir):
             parsed = parse_text_content(
                 os.path.join(root_dir, t_file['path']),
                 media_files=media_files,
-                root_path="../"
+                root_path="../",
+                base_path=cat['path']
             )
             parsed_posts.append(parsed)
             inline_media.update(parsed.get('_used_media', []))
