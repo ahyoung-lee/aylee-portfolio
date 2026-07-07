@@ -112,13 +112,15 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../", base_path="")
         if url_here:
             last_url = url_here.group(1)
 
-        list_match = re.match(r'^(\d+)\.\s*(.*)', line)
+        # Match top-level (1.) and nested (1-1., 1-2-3.) numbered list items
+        list_match = re.match(r'^(\d+(?:-\d+)*)\.\s*(.*)', line)
         bullet_match = re.match(r'^([-●*])\s*(.*)', line)
-        
+
         if list_match:
             num = list_match.group(1)
             title = list_match.group(2)
-            
+            is_sub = '-' in num
+
             next_url = ""
             j = i + 1
             while j < len(lines) and not lines[j]:
@@ -131,26 +133,27 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../", base_path="")
                     last_url = merged_url.group(1)
 
             title_with_links = apply_inline(title)
-            if next_url:
-                link_html = url_pattern.sub(make_link, next_url)
-                formatted_html.append(f'''
-                <div class="flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0">{num}</span>
-                    <div class="flex-1">
-                        <h4 class="font-bold text-gray-900 text-lg leading-snug">{title_with_links}</h4>
-                        <div class="mt-1">{link_html}</div>
-                    </div>
-                </div>
-                ''')
+            link_html = url_pattern.sub(make_link, next_url) if next_url else ""
+            inner_link = f'<div class="mt-1">{link_html}</div>' if next_url else ''
+
+            if is_sub:
+                wrapper_cls = "flex items-start gap-3 p-3.5 mb-2 ml-6 md:ml-10 bg-white border border-gray-100 rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-sm"
+                badge_cls = "flex items-center justify-center min-w-[2.25rem] h-6 px-2 rounded-full bg-blue-50/70 text-blue-500 font-bold text-xs flex-shrink-0"
+                title_cls = "font-semibold text-gray-800 text-base leading-snug"
             else:
-                formatted_html.append(f'''
-                <div class="flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0">{num}</span>
-                    <div class="flex-1">
-                        <h4 class="font-bold text-gray-900 text-lg leading-snug">{title_with_links}</h4>
-                    </div>
+                wrapper_cls = "flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow"
+                badge_cls = "flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0"
+                title_cls = "font-bold text-gray-900 text-lg leading-snug"
+
+            formatted_html.append(f'''
+            <div class="{wrapper_cls}">
+                <span class="{badge_cls}">{num}</span>
+                <div class="flex-1">
+                    <h4 class="{title_cls}">{title_with_links}</h4>
+                    {inner_link}
                 </div>
-                ''')
+            </div>
+            ''')
         elif bullet_match:
             bullet_char = bullet_match.group(1)
             content = bullet_match.group(2)
