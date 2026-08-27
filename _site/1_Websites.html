@@ -566,7 +566,22 @@ if (typeof handleCategoryClick !== 'function') {
             
                 <!-- 서브페이지 동적 콘텐츠 -->
                 <div class="p-5 md:p-10 flex-1">
-                    <article class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-8 mb-4 md:mb-8 max-w-4xl hover:shadow-md transition-shadow">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 mb-12">
+    
+    
+    <div class="cursor-pointer group relative overflow-hidden rounded-xl shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-gray-50 border border-gray-100 aspect-square flex items-center justify-center"
+         onclick="openLightbox('../1 Websites/청담나의원피부페이지영문_메인.jpg', '청담나의원피부페이지영문_메인.jpg')">
+        <img src="../1 Websites/청담나의원피부페이지영문_메인.jpg" alt="청담나의원피부페이지영문_메인.jpg" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+        
+        <!-- Hover Overlay -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+            <span class="text-white text-sm font-semibold text-center break-words transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">청담나의원피부페이지영문_메인.jpg</span>
+        </div>
+    </div>
+    
+    
+</div>
+<article class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-8 mb-4 md:mb-8 max-w-4xl hover:shadow-md transition-shadow">
     <header class="mb-4 md:mb-6 pb-4 md:pb-6 border-b border-gray-100">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900">웹사이트</h2>
     </header>
