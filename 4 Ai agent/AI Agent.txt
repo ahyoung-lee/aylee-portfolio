@@ -60,7 +60,7 @@ instagram-auto-system
 -폴더 내 이미지 드래그 시 자동 업로드 
 -깃 허브 & 로컬 폴더 동기화 
 <br>
-워크플로우
+- 워크플로우 -
 [STATUS: IDLE]
 ⬇ (로컬/원격 폴더 내 트리 구조 또는 파일 변경 발생)
 [STATUS: TRIGGERED]
