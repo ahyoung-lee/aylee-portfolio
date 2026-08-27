@@ -135,6 +135,8 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../", base_path="")
         # Match top-level (1.) and nested (1-1., 1-2-3.) numbered list items
         list_match = re.match(r'^(\d+(?:-\d+)*)\.\s*(.*)', line)
         bullet_match = re.match(r'^([-●*])\s*(.*)', line)
+        # Section title: same marker on both ends, e.g. "- 제작 과정 -"
+        heading_match = re.match(r'^([-●*])\s*(.+?)\s*\1$', line)
 
         if list_match:
             num = list_match.group(1)
@@ -193,6 +195,9 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../", base_path="")
                 </div>
             </div>
             ''')
+        elif heading_match:
+            title_text = apply_inline(heading_match.group(2))
+            formatted_html.append(f'<h3 class="text-xl font-bold text-gray-900 mt-6 mb-4 pb-2 border-b border-gray-100 flex items-center gap-2"><span class="w-1.5 h-6 bg-blue-600 rounded-full"></span>{title_text}</h3>')
         elif bullet_match:
             bullet_char = bullet_match.group(1)
             content = bullet_match.group(2)
@@ -209,11 +214,7 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../", base_path="")
                 formatted_html.append(f'<div class="mb-4 pl-4">{link_html}</div>')
             else:
                 line_with_links = apply_inline(line)
-                if line.startswith('●') and line.endswith('●'):
-                    title_text = line.strip('●')
-                    formatted_html.append(f'<h3 class="text-xl font-bold text-gray-900 mt-6 mb-4 pb-2 border-b border-gray-100 flex items-center gap-2"><span class="w-1.5 h-6 bg-blue-600 rounded-full"></span>{title_text}</h3>')
-                else:
-                    formatted_html.append(f'<p class="text-base text-gray-700 leading-relaxed mb-4">{line_with_links}</p>')
+                formatted_html.append(f'<p class="text-base text-gray-700 leading-relaxed mb-4">{line_with_links}</p>')
         i += 1
         
     html_out = '<div class="space-y-1">' + "\n".join(formatted_html) + '</div>'
