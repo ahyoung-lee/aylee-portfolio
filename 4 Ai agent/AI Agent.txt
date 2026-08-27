@@ -21,10 +21,10 @@
 - 렌더 무료 호스팅 사이트 깃허브 연결 
 - 생성 버튼 클릭시 API 이미지 및 글 생성 달러 소모로 URL 비공개
 <br>
--메인페이지
+- 메인페이지 -
 <instagram img>
 <br>
--폴더구조
+- 폴더구조 -
 instagram-auto-system
 
 │
