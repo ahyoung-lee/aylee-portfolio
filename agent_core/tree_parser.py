@@ -34,9 +34,24 @@ def parse_profile(root_dir):
             print(f"[Warning] Failed to parse profile.txt: {e}")
     return profile_data
 
+def get_added_time(stat_result):
+    """폴더에 추가된 시점(생성 시각)을 반환한다.
+
+    Windows는 st_ctime, macOS는 st_birthtime이 생성 시각이다.
+    생성 시각을 알 수 없는 환경(대부분의 Linux)에서는 수정 시각으로 대체한다.
+    """
+    birthtime = getattr(stat_result, 'st_birthtime', None)
+    if birthtime:
+        return birthtime
+    if os.name == 'nt':
+        return stat_result.st_ctime
+    return stat_result.st_mtime
+
+
 def get_file_info(file_path, rel_path):
     try:
-        size = os.path.getsize(file_path)
+        stat_result = os.stat(file_path)
+        size = stat_result.st_size
         if size > MAX_FILE_SIZE or size == 0:
             return None
         
@@ -54,7 +69,8 @@ def get_file_info(file_path, rel_path):
             "path": unicodedata.normalize('NFC', rel_path.replace("\\", "/")),
             "type": file_type,
             "ext": ext,
-            "mtime": os.path.getmtime(file_path)
+            "mtime": stat_result.st_mtime,
+            "added": get_added_time(stat_result)
         }
     except Exception:
         return None
@@ -187,8 +203,8 @@ def _get_files(root_dir, dir_path):
                 f_info = get_file_info(full_path, rel_path)
                 if f_info:
                     files.append(f_info)
-        # Sort files by modification time descending (newest first)
-        files.sort(key=lambda x: x.get("mtime", 0), reverse=True)
+        # 폴더에 추가한 날짜 기준 내림차순 (최근에 추가한 파일이 맨 위)
+        files.sort(key=lambda x: (x.get("added", 0), x.get("mtime", 0)), reverse=True)
     except Exception:
         pass
     return files
