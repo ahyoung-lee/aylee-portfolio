@@ -79,144 +79,201 @@ def rich_text_to_html(raw_text, media_files=None, root_path="../", base_path="")
 
     raw_lines = [line.strip() for line in raw_text.split('\n')]
     lines = [html.escape(line) for line in raw_lines]
-    formatted_html = []
+    n = len(lines)
     last_url = None  # most recent URL, used as click target for inline images
 
-    i = 0
-    consecutive_empty = 0
-    while i < len(lines):
-        raw_line = raw_lines[i]
+    # Detail-line style used both for a sub-item's own detail lines and for
+    # any plain line found inside a top-level section's body, so the two
+    # look the same as they always have.
+    section_detail_cls = "text-sm md:text-base text-gray-600"
 
-        # Marker: <br>  ->  line break / vertical gap
-        if raw_line.lower() == '<br>':
-            formatted_html.append('<div class="h-6"></div>')
-            consecutive_empty = 0
-            i += 1
-            continue
+    def render_range(start, end, inside_section):
+        """Render lines[start:end) into a list of HTML block strings.
 
-        # Marker: <xxx img>  ->  insert matching image from the same folder
-        marker_match = re.match(r'^<\s*(.+?)\s*>$', raw_line)
-        if marker_match and media_files:
-            mf = _resolve_media(marker_match.group(1), media_files)
-            if mf:
-                used_media.append(mf['name'])
-                src = html.escape(f"{root_path}{mf['path']}")
-                alt = html.escape(mf['name'])
-                img_tag = (
-                    f'<img src="{src}" alt="{alt}" loading="lazy" '
-                    f'class="w-full max-w-2xl md:max-w-3xl h-auto rounded-xl shadow-md border border-gray-100">'
-                )
-                if last_url:
-                    inner = (
-                        f'<a href="{html.escape(last_url)}" target="_blank" rel="noopener noreferrer" '
-                        f'class="block hover:opacity-90 transition-opacity">{img_tag}</a>'
-                    )
-                else:
-                    inner = img_tag
-                formatted_html.append(f'<div class="my-6 flex justify-center">{inner}</div>')
+        `inside_section` is True while rendering the body of a top-level
+        (non-sub) numbered item, so plain lines get the same compact
+        "detail" styling as e.g. "웹사이트 : ..." lines instead of the
+        looser page-level paragraph styling.
+        """
+        nonlocal last_url
+        out = []
+        i = start
+        consecutive_empty = 0
+        while i < end:
+            raw_line = raw_lines[i]
+
+            # Marker: <br>  ->  line break / vertical gap
+            if raw_line.lower() == '<br>':
+                out.append('<div class="h-6"></div>')
                 consecutive_empty = 0
                 i += 1
                 continue
 
-        line = lines[i]
-        if not line:
-            consecutive_empty += 1
-            if consecutive_empty == 2 and i > 0 and i < len(lines) - 1:
-                formatted_html.append('<div class="h-10"></div>')
-            i += 1
-            continue
-        consecutive_empty = 0
+            # Marker: <xxx img>  ->  insert matching image from the same folder
+            marker_match = re.match(r'^<\s*(.+?)\s*>$', raw_line)
+            if marker_match and media_files:
+                mf = _resolve_media(marker_match.group(1), media_files)
+                if mf:
+                    used_media.append(mf['name'])
+                    src = html.escape(f"{root_path}{mf['path']}")
+                    alt = html.escape(mf['name'])
+                    img_tag = (
+                        f'<img src="{src}" alt="{alt}" loading="lazy" '
+                        f'class="w-full max-w-2xl md:max-w-3xl h-auto rounded-xl shadow-md border border-gray-100">'
+                    )
+                    if last_url:
+                        inner = (
+                            f'<a href="{html.escape(last_url)}" target="_blank" rel="noopener noreferrer" '
+                            f'class="block hover:opacity-90 transition-opacity">{img_tag}</a>'
+                        )
+                    else:
+                        inner = img_tag
+                    out.append(f'<div class="my-6 flex justify-center">{inner}</div>')
+                    consecutive_empty = 0
+                    i += 1
+                    continue
 
-        # Remember the most recent URL so a following image can link to it
-        url_here = url_pattern.search(raw_line)
-        if url_here:
-            last_url = url_here.group(1)
+            line = lines[i]
+            if not line:
+                consecutive_empty += 1
+                if consecutive_empty == 2 and i > start and i < end - 1:
+                    out.append('<div class="h-10"></div>')
+                i += 1
+                continue
+            consecutive_empty = 0
 
-        # Match top-level (1.) and nested (1-1., 1-2-3.) numbered list items
-        list_match = re.match(r'^(\d+(?:-\d+)*)\.\s*(.*)', line)
-        bullet_match = re.match(r'^([-●*])\s*(.*)', line)
-        # Section title: same marker on both ends, e.g. "- 제작 과정 -"
-        heading_match = re.match(r'^([-●*])\s*(.+?)\s*\1$', line)
+            # Remember the most recent URL so a following image can link to it
+            url_here = url_pattern.search(raw_line)
+            if url_here:
+                last_url = url_here.group(1)
 
-        if list_match:
-            num = list_match.group(1)
-            title = list_match.group(2)
-            is_sub = '-' in num
+            # Match top-level (1.) and nested (1-1., 1-2-3.) numbered list items
+            list_match = re.match(r'^(\d+(?:-\d+)*)\.\s*(.*)', line)
+            bullet_match = re.match(r'^([-●*])\s*(.*)', line)
+            # Section title: same marker on both ends, e.g. "- 제작 과정 -"
+            heading_match = re.match(r'^([-●*])\s*(.+?)\s*\1$', line)
 
-            # Gather following detail lines (e.g. "웹사이트 : ...", "메인 : ...")
-            # into this card. Stop at a blank line, a new numbered item, a
-            # bullet, a <br>, or a standalone <...> marker so other blocks and
-            # pages are unaffected.
-            detail_htmls = []
-            j = i + 1
-            while j < len(lines):
-                esc_j = lines[j]
-                raw_j = raw_lines[j]
-                if (not esc_j
-                        or raw_j.lower() == '<br>'
-                        or re.match(r'^<\s*.+?\s*>$', raw_j)
-                        or re.match(r'^\d+(?:-\d+)*\.', esc_j)
-                        or re.match(r'^[-●*]', esc_j)):
-                    break
-                u = url_pattern.search(raw_j)
-                if u:
-                    last_url = u.group(1)
-                detail_htmls.append(apply_inline(esc_j))
-                j += 1
-            i = j - 1  # main loop advances with i += 1
+            if list_match:
+                num = list_match.group(1)
+                title = list_match.group(2)
+                is_sub = '-' in num
 
-            title_with_links = apply_inline(title)
+                # Gather following detail lines (e.g. "웹사이트 : ...", "메인 : ...")
+                # into this card. Stop at a blank line, a new numbered item, a
+                # bullet, a <br>, or a standalone <...> marker so other blocks and
+                # pages are unaffected.
+                detail_htmls = []
+                j = i + 1
+                while j < end:
+                    esc_j = lines[j]
+                    raw_j = raw_lines[j]
+                    if (not esc_j
+                            or raw_j.lower() == '<br>'
+                            or re.match(r'^<\s*.+?\s*>$', raw_j)
+                            or re.match(r'^\d+(?:-\d+)*\.', esc_j)
+                            or re.match(r'^[-●*]', esc_j)):
+                        break
+                    u = url_pattern.search(raw_j)
+                    if u:
+                        last_url = u.group(1)
+                    detail_htmls.append(apply_inline(esc_j))
+                    j += 1
+                i = j - 1  # loop advances with i += 1 below
 
-            if is_sub:
+                title_with_links = apply_inline(title)
+
+                # Only sub-items (1-1., 1-2., ...) are rendered here; a
+                # top-level item is only ever reached via render_range when
+                # inside_section is False, i.e. before the first section.
                 wrapper_cls = "flex items-start gap-3 p-3.5 mb-2 ml-6 md:ml-10 bg-white border border-gray-100 rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-sm"
                 badge_cls = "flex items-center justify-center min-w-[2.25rem] h-6 px-2 rounded-full bg-blue-50/70 text-blue-500 font-bold text-xs flex-shrink-0"
                 title_cls = "font-semibold text-gray-800 text-base leading-snug"
                 detail_cls = "text-sm text-gray-600"
-            else:
-                wrapper_cls = "flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow"
-                badge_cls = "flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0"
-                title_cls = "font-bold text-gray-900 text-lg leading-snug"
-                detail_cls = "text-sm md:text-base text-gray-600"
 
-            if detail_htmls:
-                items = "\n".join(
-                    f'<div class="{detail_cls} break-words">{d}</div>' for d in detail_htmls
-                )
-                detail_block = f'<div class="mt-2 space-y-1">{items}</div>'
+                if detail_htmls:
+                    items = "\n".join(
+                        f'<div class="{detail_cls} break-words">{d}</div>' for d in detail_htmls
+                    )
+                    detail_block = f'<div class="mt-2 space-y-1">{items}</div>'
+                else:
+                    detail_block = ''
+
+                out.append(f'''
+                <div class="{wrapper_cls}">
+                    <span class="{badge_cls}">{num}</span>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="{title_cls}">{title_with_links}</h4>
+                        {detail_block}
+                    </div>
+                </div>
+                ''')
+            elif heading_match:
+                title_text = apply_inline(heading_match.group(2))
+                out.append(f'<h3 class="text-xl font-bold text-gray-900 mt-6 mb-4 pb-2 border-b border-gray-100 flex items-center gap-2"><span class="w-1.5 h-6 bg-blue-600 rounded-full"></span>{title_text}</h3>')
+            elif bullet_match:
+                content = bullet_match.group(2)
+                content_with_links = apply_inline(content)
+                out.append(f'''
+                <div class="flex items-start gap-2 pl-4 mb-2 text-gray-700">
+                    <span class="text-blue-500 flex-shrink-0 mt-1.5">•</span>
+                    <span class="text-base leading-relaxed">{content_with_links}</span>
+                </div>
+                ''')
+            elif inside_section:
+                # Plain line inside a top-level section's body: keep the
+                # same compact "detail" look as "웹사이트 : ..." lines.
+                if url_pattern.match(line):
+                    link_html = url_pattern.sub(make_link, line)
+                else:
+                    link_html = apply_inline(line)
+                out.append(f'<div class="{section_detail_cls} break-words">{link_html}</div>')
             else:
-                detail_block = ''
+                if url_pattern.match(line):
+                    link_html = url_pattern.sub(make_link, line)
+                    out.append(f'<div class="mb-4 pl-4">{link_html}</div>')
+                else:
+                    line_with_links = apply_inline(line)
+                    out.append(f'<p class="text-base text-gray-700 leading-relaxed mb-4">{line_with_links}</p>')
+            i += 1
+        return out
+
+    # A top-level numbered item (1., 2., 3., ...) becomes a full section
+    # card: everything up to the next top-level item (sub-items, bullets,
+    # headings, images) is wrapped in the same gray card as its title,
+    # instead of only the lines directly under the title.
+    top_level_starts = [
+        idx for idx, esc in enumerate(lines)
+        if (m := re.match(r'^(\d+(?:-\d+)*)\.\s*(.*)', esc)) and '-' not in m.group(1)
+    ]
+
+    formatted_html = []
+    if not top_level_starts:
+        formatted_html = render_range(0, n, inside_section=False)
+    else:
+        formatted_html.extend(render_range(0, top_level_starts[0], inside_section=False))
+        for k, start_idx in enumerate(top_level_starts):
+            seg_end = top_level_starts[k + 1] if k + 1 < len(top_level_starts) else n
+            m = re.match(r'^(\d+(?:-\d+)*)\.\s*(.*)', lines[start_idx])
+            num = m.group(1)
+            title_with_links = apply_inline(m.group(2))
+
+            body_htmls = render_range(start_idx + 1, seg_end, inside_section=True)
+            body_block = f'<div class="mt-2 space-y-1">{"".join(body_htmls)}</div>' if body_htmls else ''
+
+            wrapper_cls = "flex items-start gap-4 p-5 mb-4 bg-gray-50 border border-gray-100 rounded-xl hover:bg-gray-100/70 transition-all duration-300 shadow-sm hover:shadow"
+            badge_cls = "flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0"
+            title_cls = "font-bold text-gray-900 text-lg leading-snug"
 
             formatted_html.append(f'''
             <div class="{wrapper_cls}">
                 <span class="{badge_cls}">{num}</span>
                 <div class="flex-1 min-w-0">
                     <h4 class="{title_cls}">{title_with_links}</h4>
-                    {detail_block}
+                    {body_block}
                 </div>
             </div>
             ''')
-        elif heading_match:
-            title_text = apply_inline(heading_match.group(2))
-            formatted_html.append(f'<h3 class="text-xl font-bold text-gray-900 mt-6 mb-4 pb-2 border-b border-gray-100 flex items-center gap-2"><span class="w-1.5 h-6 bg-blue-600 rounded-full"></span>{title_text}</h3>')
-        elif bullet_match:
-            bullet_char = bullet_match.group(1)
-            content = bullet_match.group(2)
-            content_with_links = apply_inline(content)
-            formatted_html.append(f'''
-            <div class="flex items-start gap-2 pl-4 mb-2 text-gray-700">
-                <span class="text-blue-500 flex-shrink-0 mt-1.5">•</span>
-                <span class="text-base leading-relaxed">{content_with_links}</span>
-            </div>
-            ''')
-        else:
-            if url_pattern.match(line):
-                link_html = url_pattern.sub(make_link, line)
-                formatted_html.append(f'<div class="mb-4 pl-4">{link_html}</div>')
-            else:
-                line_with_links = apply_inline(line)
-                formatted_html.append(f'<p class="text-base text-gray-700 leading-relaxed mb-4">{line_with_links}</p>')
-        i += 1
-        
+
     html_out = '<div class="space-y-1">' + "\n".join(formatted_html) + '</div>'
     return html_out, used_media
 
