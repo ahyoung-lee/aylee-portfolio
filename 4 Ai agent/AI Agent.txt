@@ -28,37 +28,6 @@
 <br>
 - 메인페이지 -
 <instagram img>
-<br>
-- 폴더구조 -
-instagram-auto-system
-
-│
-
-├── index.html         # 모바일 최적화 및 Flexbox 기반 메인 UI 대시보드
-
-├── style.css      # CSS Custom Properties 및 768px 미디어 쿼리 포함 스타일시트
-
-├── main.js          # 3시간 타이머 제어, CSS 변수 조작, 비동기 API 오케스트레이션
-
-├── .gitignore          # .env, save/, pycache/ 유출 차단용 Git 설정
-
-├── .env                   # OpenAI 및 Meta Graph API 보안 인증 키 세트
-
-│
-
-└── src/                     # 백엔드 엔진 코어 (Python 3.11+ / FastAPI 아키텍처)
-
-├── app.py               # 백엔드 오케스트레이터 웹 서버 및 CORS 관리 API 엔드포인트
-
-├── agent_trend.py       # [서브에이전트 1] URL 크롤링 및 실시간 트렌드 기사 추출 모듈
-
-├── agent_creative.py    # [서브에이전트 2] 뉴스 분석, 4:5 카드 기획 및 수익화 캡션 생성 LLM
-
-├── script_vision.py     # Pillow 활용 이미지 생성, 4:5 가변 레이아웃, 상대 휘도 워터마크 합성
-
-└── script_instagram.py  # Meta Graph API 다중 컨테이너 생성 및 Carousel 최종 퍼블리싱 모듈
-
-
 
 1. 포트폴리오 폴더링 자동화 사이트 제작 (현재사이트) 2026.05
 -폴더 생성시 분류 추가
