@@ -1,5 +1,5 @@
 1. AI Automation 에이전트 개발
--Github, n8n, 노트북LM, Chatgpt, Gemini, Notion, Slack, 구글antigravity, 클로드, 코덱스 등 사용
+-Github, Chatgpt, Gemini, Notion, Slack, 구글antigravity, 클로드, 코덱스 등 사용
 -에이전트 구조 및 개발 방법론 이론 숙지
 -에이전트 설계서 및 시스템 프롬프트 설계
 -AI 워크플로우 제작 및 배포
