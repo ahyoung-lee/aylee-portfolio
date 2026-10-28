@@ -14,8 +14,6 @@
 ★구글블로거 및 티스토리 - 구글애드센스 수익화 진행중
 
 2. 카드뉴스 & 쇼츠 이미지 자동 발행 2026.07 - 기여도 100%  설계 구축
-- https://www.instagram.com/alwaysg00d/
-- https://www.youtube.com/@alwaysg0000d
 - 사용 툴 : Github, render, 구글antigravity, Gemini pro, ClaudeCode
 - 제작 과정 -
 - 에이전트 설계서 작성 > 수정작업 > OpenAI API 토큰 결제 연결 > 메타 API (자동발행 위함) 
